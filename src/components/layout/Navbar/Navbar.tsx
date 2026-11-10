@@ -54,7 +54,7 @@ export default function Navbar({
                 className="h-6 w-auto lg:h-8"
               />
             ) : (
-              <span className="text-2xl font-bold tracking-tight text-primary-600">
+              <span className="text-2xl font-bold tracking-tight text-primary">
                 FreshCart
               </span>
             )}
@@ -73,8 +73,8 @@ export default function Navbar({
               href={supportHref}
               className="mr-2 hidden items-center gap-2 border-r border-gray-200 pr-3 transition-opacity hover:opacity-80 lg:flex"
             >
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-50">
-                <Headset className="h-5 w-5 text-primary-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
+                <Headset className="h-5 w-5 text-primary" />
               </div>
 
               <div className="text-xs">
@@ -105,7 +105,7 @@ export default function Navbar({
             ) : (
               <Link
                 href="/login"
-                className="ml-2 hidden items-center gap-2 rounded-full bg-primary-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary-600/20 transition-colors hover:bg-primary-700 lg:flex"
+                className="ml-2 hidden items-center gap-2 rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white shadow-sm shadow-primary/20 transition-colors hover:bg-primary-hover lg:flex"
               >
                 <UserRound className="h-4 w-4" />
                 Sign In
@@ -120,7 +120,7 @@ export default function Navbar({
               onClick={() =>
                 setIsMobileMenuOpen((previous) => !previous)
               }
-              className="ml-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary-600 text-white transition-colors hover:bg-primary-700 lg:hidden"
+              className="ml-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-primary-hover lg:hidden"
             >
               {isMobileMenuOpen ? (
                 <X className="h-5 w-5" />
@@ -153,7 +153,7 @@ export default function Navbar({
                 onClick={closeMobileMenu}
                 className="mt-3 flex items-center gap-3 rounded-lg border-t border-gray-100 px-3 py-4 text-sm font-medium text-gray-700"
               >
-                <Headset className="h-5 w-5 text-primary-600" />
+                <Headset className="h-5 w-5 text-primary" />
                 Support — 24/7 Help
               </Link>
 
@@ -166,7 +166,7 @@ export default function Navbar({
                       onClick={closeMobileMenu}
                       className="mb-3 flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700"
                     >
-                      <UserRound className="h-5 w-5 text-primary-600" />
+                      <UserRound className="h-5 w-5 text-primary" />
                       {user.name}
                     </Link>
 
@@ -186,7 +186,7 @@ export default function Navbar({
                     <Link
                       href="/login"
                       onClick={closeMobileMenu}
-                      className="rounded-full border border-primary-600 px-4 py-2.5 text-center text-sm font-semibold text-primary-600"
+                      className="rounded-full border border-primary px-4 py-2.5 text-center text-sm font-semibold text-primary"
                     >
                       Sign In
                     </Link>
@@ -194,7 +194,7 @@ export default function Navbar({
                     <Link
                       href="/signup"
                       onClick={closeMobileMenu}
-                      className="rounded-full bg-primary-600 px-4 py-2.5 text-center text-sm font-semibold text-white"
+                      className="rounded-full bg-primary px-4 py-2.5 text-center text-sm font-semibold text-white"
                     >
                       Sign Up
                     </Link>
@@ -235,13 +235,13 @@ function MobileSearch({
         onChange={(event) => setQuery(event.target.value)}
         placeholder="Search for products, brands and more..."
         aria-label="Search products"
-        className="w-full rounded-full border border-gray-200 bg-gray-50 px-5 py-3 pr-12 text-sm outline-none transition-colors focus:border-primary-500 focus:bg-white"
+        className="w-full rounded-full border border-gray-200 bg-gray-50 px-5 py-3 pr-12 text-sm outline-none transition-colors focus:border-secondary0 focus:bg-white"
       />
 
       <button
         type="submit"
         aria-label="Submit search"
-        className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-primary-600 text-white hover:bg-primary-700"
+        className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white hover:bg-primary-hover"
       >
 <Search className="h-4 w-4" />
       </button>

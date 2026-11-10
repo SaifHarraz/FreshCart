@@ -21,7 +21,7 @@ export function AccountLinks({
         <>
           <Link
             href="/profile"
-            className="flex items-center gap-1.5 text-gray-600 transition-colors hover:text-primary-600"
+            className="flex items-center gap-1.5 text-gray-600 transition-colors hover:text-primary"
           >
             <UserRound className="size-3.5" />
             <span>{user.name}</span>
@@ -41,7 +41,7 @@ export function AccountLinks({
         <>
           <Link
             href="/login"
-            className="flex items-center gap-1.5 text-gray-600 transition-colors hover:text-primary-600"
+            className="flex items-center gap-1.5 text-gray-600 transition-colors hover:text-primary"
           >
             <UserRound className="size-3.5" />
             <span>Sign In</span>
@@ -49,7 +49,7 @@ export function AccountLinks({
 
           <Link
             href="/signup"
-            className="flex items-center gap-1.5 text-gray-600 transition-colors hover:text-primary-600"
+            className="flex items-center gap-1.5 text-gray-600 transition-colors hover:text-primary"
           >
             <UserPlus className="size-3.5" />
             <span>Sign Up</span>

@@ -28,13 +28,13 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search for products, brands and more..."
           aria-label="Search products"
-          className="w-full rounded-full border border-gray-200 bg-gray-50/50 py-3 pr-14 pl-5 text-sm transition-all placeholder:text-gray-400 focus:border-primary-500 focus:bg-white focus:ring-2 focus:ring-primary-500/20 focus:outline-none"
+          className="w-full rounded-full border border-gray-200 bg-gray-50/50 py-3 pr-14 pl-5 text-sm transition-all placeholder:text-gray-400 focus:border-secondary0 focus:bg-white focus:ring-2 focus:ring-secondary0/20 focus:outline-none"
         />
 
         <button
           type="submit"
           aria-label="Submit search"
-          className="absolute top-1/2 right-1.5 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-primary-600 text-white transition-colors hover:bg-primary-700"
+          className="absolute top-1/2 right-1.5 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-primary-hover"
         >
           <Search className="h-4 w-4" />
         </button>
