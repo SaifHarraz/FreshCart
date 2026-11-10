@@ -12,12 +12,13 @@ import {
   Settings,
   UserRound,
 } from "lucide-react";
+import { HeaderUser } from "../../types";
+import { accountLinks } from "../../header-config";
 
-import { accountLinks } from "../header-config";
-import type { HeaderUser } from "../types";
+
 
 interface AccountMenuProps {
-  user: HeaderUser;
+  user: HeaderUser ;
   onLogout?: () => void;
 }
 

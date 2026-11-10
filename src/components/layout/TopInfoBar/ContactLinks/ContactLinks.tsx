@@ -1,7 +1,6 @@
 import { Mail, Phone } from "lucide-react";
 
-import type { TopInfoBarData } from "./types";
-
+import type { TopInfoBarData } from "../../types";
 type ContactLinksProps = {
   phone: TopInfoBarData["phone"];
   email: TopInfoBarData["email"];

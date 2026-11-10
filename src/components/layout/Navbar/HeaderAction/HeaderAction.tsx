@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { HeaderActionProps } from "../../types";
 
-import type { HeaderActionProps } from "../types";
+
 
 export default function HeaderAction({
   href,

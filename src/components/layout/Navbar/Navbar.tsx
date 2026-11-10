@@ -7,6 +7,7 @@ import {
   Headset,
   Heart,
   Menu,
+  Search,
   ShoppingCart,
   UserRound,
   X,
@@ -14,11 +15,12 @@ import {
 
 import { headerConfig, navigationItems } from "../header-config";
 import type { NavbarProps } from "../types";
+import SearchBar from "./SearchBar/SearchBar";
+import NavigationLinks from "./NavigationLinks/NavigationLinks";
+import HeaderAction from "./HeaderAction/HeaderAction";
+import AccountMenu from "./AccountMenu/AccountMenu";
 
-import AccountMenu from "./AccountMenu";
-import HeaderAction from "./HeaderAction";
-import NavigationLinks from "./NavigationLinks";
-import SearchBar from "./SearchBar";
+
 
 export default function Navbar({
   user,
@@ -241,7 +243,7 @@ function MobileSearch({
         aria-label="Submit search"
         className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-primary-600 text-white hover:bg-primary-700"
       >
-        <ShoppingCart className="h-4 w-4" />
+<Search className="h-4 w-4" />
       </button>
     </form>
   );

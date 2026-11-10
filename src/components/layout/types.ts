@@ -23,6 +23,23 @@ export interface HeaderActionProps {
   count?: number;
 }
 
+export interface PromoItem {
+  id: string;
+  label: string;
+  icon: "truck" | "gift";
+}
+
+export interface ContactItem {
+  label: string;
+  href: string;
+}
+
+export interface TopInfoBarData {
+  promotions: PromoItem[];
+  phone: ContactItem;
+  email: ContactItem;
+}
+
 export interface TopInfoBarProps {
   user?: HeaderUser | null;
   shippingMessage?: string;
