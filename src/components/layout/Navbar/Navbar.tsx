@@ -12,15 +12,13 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-
+import MobileNavigationSheet from "./MobileNavigationSheet/MobileNavigationSheet";
 import { headerConfig, navigationItems } from "../header-config";
 import type { NavbarProps } from "../types";
 import SearchBar from "./SearchBar/SearchBar";
 import NavigationLinks from "./NavigationLinks/NavigationLinks";
 import HeaderAction from "./HeaderAction/HeaderAction";
 import AccountMenu from "./AccountMenu/AccountMenu";
-
-
 
 export default function Navbar({
   user,
@@ -32,10 +30,10 @@ export default function Navbar({
   onLogout,
   onSearch,
 }: NavbarProps) {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
 
   function closeMobileMenu() {
-    setIsMobileMenuOpen(false);
+    setIsMobileSheetOpen(false);
   }
 
   return (
@@ -115,94 +113,27 @@ export default function Navbar({
             {/* Mobile menu button */}
             <button
               type="button"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={isMobileMenuOpen}
-              onClick={() =>
-                setIsMobileMenuOpen((previous) => !previous)
-              }
-              className="ml-1 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-primary-hover lg:hidden"
+              aria-label="Open navigation"
+              onClick={() => setIsMobileSheetOpen(true)}
+              className="lg:hidden"
             >
-              {isMobileMenuOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
+              <Menu className="size-6" />
             </button>
           </div>
         </div>
 
         {/* Mobile navigation */}
-        {isMobileMenuOpen && (
-          <div className="absolute top-full right-0 left-0 border-t border-gray-100 bg-white shadow-xl lg:hidden">
-            <div className="max-h-[calc(100dvh-64px)] overflow-y-auto p-4">
-              {/* Mobile search */}
-              <div className="mb-4">
-                <MobileSearch onSearch={onSearch} />
-              </div>
-
-              {/* Navigation */}
-              <NavigationLinks
-                items={navItems}
-                mobile
-                onNavigate={closeMobileMenu}
-              />
-
-              {/* Support */}
-              <Link
-                href={supportHref}
-                onClick={closeMobileMenu}
-                className="mt-3 flex items-center gap-3 rounded-lg border-t border-gray-100 px-3 py-4 text-sm font-medium text-gray-700"
-              >
-                <Headset className="h-5 w-5 text-primary" />
-                Support — 24/7 Help
-              </Link>
-
-              {/* Mobile account actions */}
-              <div className="mt-2 border-t border-gray-100 pt-3">
-                {user ? (
-                  <>
-                    <Link
-                      href="/profile"
-                      onClick={closeMobileMenu}
-                      className="mb-3 flex items-center gap-3 px-3 py-2 text-sm font-medium text-gray-700"
-                    >
-                      <UserRound className="h-5 w-5 text-primary" />
-                      {user.name}
-                    </Link>
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        closeMobileMenu();
-                        onLogout?.();
-                      }}
-                      className="w-full rounded-lg px-3 py-3 text-left text-sm font-medium text-red-500 hover:bg-red-50"
-                    >
-                      Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <div className="grid grid-cols-2 gap-3">
-                    <Link
-                      href="/login"
-                      onClick={closeMobileMenu}
-                      className="rounded-full border border-primary px-4 py-2.5 text-center text-sm font-semibold text-primary"
-                    >
-                      Sign In
-                    </Link>
-
-                    <Link
-                      href="/signup"
-                      onClick={closeMobileMenu}
-                      className="rounded-full bg-primary px-4 py-2.5 text-center text-sm font-semibold text-white"
-                    >
-                      Sign Up
-                    </Link>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
+        {isMobileSheetOpen && (
+          <MobileNavigationSheet
+            open={isMobileSheetOpen}
+            onOpenChange={setIsMobileSheetOpen}
+            user={user}
+            logoSrc={logoSrc}
+            navItems={navItems}
+            supportHref={supportHref}
+            onLogout={onLogout}
+            onSearch={onSearch}
+          />
         )}
       </div>
     </header>
@@ -213,11 +144,7 @@ export default function Navbar({
  * Kept separate from the desktop SearchBar so the mobile header
  * can show its own responsive search field.
  */
-function MobileSearch({
-  onSearch,
-}: {
-  onSearch?: (query: string) => void;
-}) {
+function MobileSearch({ onSearch }: { onSearch?: (query: string) => void }) {
   const [query, setQuery] = useState("");
 
   return (
@@ -243,7 +170,7 @@ function MobileSearch({
         aria-label="Submit search"
         className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white hover:bg-primary-hover"
       >
-<Search className="h-4 w-4" />
+        <Search className="h-4 w-4" />
       </button>
     </form>
   );

@@ -7,7 +7,7 @@ import { PromoMessages } from "./PromoMessages/PromoMessages";
 export default function TopInfoBar({ user, onLogout }: TopInfoBarProps) {
   return (
     <div className="hidden bg-gray-900 text-white lg:block">
-      <div className="container mx-auto flex items-center justify-between px-4 py-2">
+      <div className="container mx-auto flex items-center justify-between px-4 py-2 text-sm leading-5">
         <PromoMessages items={topInfoBarData.promotions} />
 
         <div className="flex items-center gap-6">
