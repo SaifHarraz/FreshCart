@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FreshCart | Online Shopping",
+  title: "FreshCart | Saif Harraz ",
   description: "Discover quality products at FreshCart.",
 };
 
