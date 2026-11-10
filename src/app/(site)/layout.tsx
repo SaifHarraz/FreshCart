@@ -1,5 +1,4 @@
-import SiteHeader from "@/components/layout/SiteHeader";
-
+import SiteHeader from "@/components/layout/SiteHeader/SiteHeader";
 export default function SiteLayout({
   children,
 }: Readonly<{

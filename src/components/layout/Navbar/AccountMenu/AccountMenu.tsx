@@ -12,7 +12,7 @@ import {
   Settings,
   UserRound,
 } from "lucide-react";
-import { HeaderUser } from "../../types";
+import type { HeaderUser } from "../../types";
 import { accountLinks } from "../../header-config";
 
 

@@ -5,10 +5,9 @@ import {
   UserPlus,
 } from "lucide-react";
 
-import type { TopInfoBarUser } from "./types";
-
+import type { HeaderUser } from "../../types";
 type AccountLinksProps = {
-  user?: TopInfoBarUser | null;
+  user?: HeaderUser | null;
   onSignOut?: () => void;
 };
 
