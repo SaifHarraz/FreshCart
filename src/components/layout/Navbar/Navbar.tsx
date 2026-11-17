@@ -19,6 +19,7 @@ import SearchBar from "./SearchBar/SearchBar";
 import NavigationLinks from "./NavigationLinks/NavigationLinks";
 import HeaderAction from "./HeaderAction/HeaderAction";
 import AccountMenu from "./AccountMenu/AccountMenu";
+import BrandLogo from "../BrandLogo/BrandLogo";
 
 export default function Navbar({
   user,
@@ -41,22 +42,7 @@ export default function Navbar({
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between gap-4 lg:h-[72px] lg:gap-8">
           {/* Logo */}
-          <Link href="/" className="shrink-0" aria-label="FreshCart home">
-            {logoSrc ? (
-              <Image
-                src={logoSrc}
-                alt="FreshCart"
-                width={160}
-                height={31}
-                priority
-                className="h-6 w-auto lg:h-8"
-              />
-            ) : (
-              <span className="text-2xl font-bold tracking-tight text-primary">
-                FreshCart
-              </span>
-            )}
-          </Link>
+          <BrandLogo variant="navbar" />
 
           {/* Desktop search */}
           <SearchBar onSearch={onSearch} />

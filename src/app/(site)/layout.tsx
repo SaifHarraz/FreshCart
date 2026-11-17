@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer/Footer";
 import SiteHeader from "@/components/layout/SiteHeader/SiteHeader";
 export default function SiteLayout({
   children,
@@ -13,6 +14,7 @@ export default function SiteLayout({
       />
 
       <main>{children}</main>
+      <Footer user={null} />
     </>
   );
 }
