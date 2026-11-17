@@ -13,7 +13,7 @@ import "swiper/css";
 
 import backgroundImage from "@/assets/images/home-slider-1.d79601a8.png";
 
-import { homeSliderSlides } from "../data";
+import { homeSliderSlides } from "./data";
 
 export default function HomeSlider() {
   const [swiper, setSwiper] = useState<SwiperInstance | null>(null);
@@ -26,15 +26,13 @@ export default function HomeSlider() {
     >
       {/* Slides */}
       <Swiper
-          slidesPerView={1}
-  spaceBetween={0}
-  speed={700}
-  loop={true}
-  onSwiper={setSwiper}
-  onSlideChange={(instance) =>
-    setActiveIndex(instance.realIndex)
-  }
-  className="h-full w-full"
+        slidesPerView={1}
+        spaceBetween={0}
+        speed={700}
+        loop={true}
+        onSwiper={setSwiper}
+        onSlideChange={(instance) => setActiveIndex(instance.realIndex)}
+        className="h-full w-full"
       >
         {homeSliderSlides.map((slide, index) => (
           <SwiperSlide key={slide.id} className="h-full">
@@ -77,8 +75,9 @@ export default function HomeSlider() {
                     <Link
                       href={slide.primaryAction.href}
                       tabIndex={isActive ? 0 : -1}
-                     className="inline-flex items-center justify-center rounded-lg border-2 border-white/50 bg-white px-[26px] py-[10px] text-base leading-6 font-semibold transition-transform hover:scale-105"
-style={{ color: slide.primaryAction.textColor }}>
+                      className="inline-flex items-center justify-center rounded-lg border-2 border-white/50 bg-white px-[26px] py-[10px] text-base leading-6 font-semibold transition-transform hover:scale-105"
+                      style={{ color: slide.primaryAction.textColor }}
+                    >
                       {slide.primaryAction.label}
                     </Link>
 

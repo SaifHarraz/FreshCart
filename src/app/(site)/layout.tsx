@@ -1,3 +1,4 @@
+import BenefitsStrip from "@/components/layout/BenefitsStrip/BenefitsStrip";
 import Footer from "@/components/layout/Footer/Footer";
 import SiteHeader from "@/components/layout/SiteHeader/SiteHeader";
 export default function SiteLayout({
@@ -14,6 +15,7 @@ export default function SiteLayout({
       />
 
       <main>{children}</main>
+         <BenefitsStrip />
       <Footer user={null} />
     </>
   );
