@@ -20,7 +20,6 @@ import { homeSliderSlides } from "./data";
 
 export default function HomeSlider() {
   const [swiper, setSwiper] = useState<SwiperInstance | null>(null);
-  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
     <section
@@ -29,15 +28,18 @@ export default function HomeSlider() {
     >
       {/* Slides */}
       <Swiper
-     modules={[Pagination]}
-  loop={true}
-  allowTouchMove={false}
-  autoplay={false}
+  modules={[Pagination]}
+  onSwiper={setSwiper}
+  loop
   pagination={{
     clickable: true,
+    bulletClass: "home-slider-bullet",
+    bulletActiveClass: "home-slider-bullet-active",
+  
   }}
   className="home-slider h-full w-full"
 >
+        {/* Slides */}
         {homeSliderSlides.map((slide, index) => (
           <SwiperSlide key={slide.id} className="h-full">
             {({ isActive }) => (
@@ -120,23 +122,7 @@ export default function HomeSlider() {
         <ChevronRight className="size-6" />
       </button>
 
-      {/* Custom pagination */}
-      <div className="absolute bottom-2 left-1/2 z-20 flex -translate-x-1/2 items-center gap-2">
-        {homeSliderSlides.map((slide, index) => (
-          <button
-            key={slide.id}
-            type="button"
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={activeIndex === index ? "true" : undefined}
-            onClick={() => swiper?.slideToLoop(index)}
-            className={`h-3 cursor-pointer rounded-full transition-all duration-300 ${
-              activeIndex === index
-                ? "w-8 bg-white"
-                : "w-3 bg-white/50 hover:bg-white/75"
-            }`}
-          />
-        ))}
-      </div>
+     
     </section>
   );
 }
