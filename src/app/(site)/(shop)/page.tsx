@@ -1,3 +1,10 @@
-export default function Page() {
-  return <main></main>;
+import HomeSlider from "@/features/products/home/components/HomeSlider";
+
+
+export default function HomePage() {
+  return (
+    <>
+      <HomeSlider />
+    </>
+  );
 }

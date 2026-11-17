@@ -135,3 +135,45 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom page scrollbar */
+html {
+  scrollbar-width: auto;
+  scrollbar-color: #bdbdbd #292929;
+}
+
+/* Chrome, Edge, Safari */
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #292929;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border: 2px solid #292929;
+  border-radius: 10px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #d0d0d0;
+}
+
+/* Scrollbar arrow buttons */
+html::-webkit-scrollbar-button {
+  display: block;
+  height: 16px;
+  background-color: #292929;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+html::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23bdbdbd' d='M5 2 9 8H1z'/%3E%3C/svg%3E");
+}
+
+html::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23bdbdbd' d='M1 2h8L5 8z'/%3E%3C/svg%3E");
+}
