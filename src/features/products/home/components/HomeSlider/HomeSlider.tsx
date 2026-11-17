@@ -10,7 +10,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperInstance } from "swiper";
 
 import "swiper/css";
+import { Pagination } from "swiper/modules";
 
+import "swiper/css";
+import "swiper/css/pagination";
 import backgroundImage from "@/assets/images/home-slider-1.d79601a8.png";
 
 import { homeSliderSlides } from "./data";
@@ -26,14 +29,15 @@ export default function HomeSlider() {
     >
       {/* Slides */}
       <Swiper
-        slidesPerView={1}
-        spaceBetween={0}
-        speed={700}
-        loop={true}
-        onSwiper={setSwiper}
-        onSlideChange={(instance) => setActiveIndex(instance.realIndex)}
-        className="h-full w-full"
-      >
+     modules={[Pagination]}
+  loop={true}
+  allowTouchMove={false}
+  autoplay={false}
+  pagination={{
+    clickable: true,
+  }}
+  className="home-slider h-full w-full"
+>
         {homeSliderSlides.map((slide, index) => (
           <SwiperSlide key={slide.id} className="h-full">
             {({ isActive }) => (
