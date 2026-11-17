@@ -23,7 +23,7 @@ export default function NavigationLinks({
             <Link
               href={item.href}
               onClick={onNavigate}
-              className="flex items-center justify-between px-3 py-3 text-sm font-medium text-gray-700 transition-colors hover:text-primary"
+              className="flex items-center justify-between px-3 py-3 text-base leading-6 font-medium text-gray-700 transition-colors hover:text-primary"
             >
               {item.label}
             </Link>
@@ -57,8 +57,7 @@ export default function NavigationLinks({
         <div key={item.href} className="group relative">
           <Link
             href={item.href}
-            className="flex items-center gap-1 py-6 text-sm font-medium text-gray-700 transition-colors hover:text-primary"
-          >
+           className="flex items-center gap-1 py-6 text-base leading-6 font-medium text-gray-700 transition-colors hover:text-primary" >
             {item.label}
 
             {item.children?.length ? (

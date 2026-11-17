@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import Image from "next/image";
+import BrandLogo from "../../BrandLogo/BrandLogo";
 import Link from "next/link";
 import {
   Headset,
@@ -55,26 +55,7 @@ export default function MobileNavigationSheet({
 
         {/* Header */}
         <div className="flex items-center justify-between border-b border-gray-100 bg-gray-50/50 p-4">
-          <Link
-            href="/"
-            onClick={closeSheet}
-            aria-label="FreshCart home"
-          >
-            {logoSrc ? (
-              <Image
-                src={logoSrc}
-                alt="FreshCart"
-                width={160}
-                height={31}
-                className="h-8 w-auto"
-                priority
-              />
-            ) : (
-              <span className="text-2xl font-bold text-gray-800">
-                FreshCart
-              </span>
-            )}
-          </Link>
+          <BrandLogo variant="navbar" />
 
           <button
             type="button"

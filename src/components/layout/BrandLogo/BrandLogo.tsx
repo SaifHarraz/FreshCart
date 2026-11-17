@@ -1,10 +1,9 @@
 
+import Image from "next/image";
 import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
 
-interface BrandLogoProps {
-  variant?: "navbar" | "footer";
-}
+import logo from "@/assets/images/freshcart-logo.49f1b44d.svg";
+import type { BrandLogoProps } from "./types";
 
 export default function BrandLogo({
   variant = "navbar",
@@ -15,30 +14,18 @@ export default function BrandLogo({
     <Link
       href="/"
       aria-label="FreshCart home"
-      className={`inline-flex shrink-0 items-center gap-2 ${
+      className={
         isFooter
-          ? "rounded-lg bg-white px-3 py-2"
-          : ""
-      }`}
+          ? "inline-flex shrink-0 rounded-lg bg-white px-4 py-2"
+          : "inline-flex shrink-0"
+      }
     >
-      <ShoppingCart
-        className={`shrink-0 -scale-x-100 ${
-          isFooter
-            ? "size-7 text-primary"
-            : "size-7 text-primary lg:size-8"
-        }`}
-        strokeWidth={1.8}
+      <Image
+        src={logo}
+        alt="FreshCart"
+        priority
+        className="h-auto w-[160px]"
       />
-
-      <span
-        className={`font-bold tracking-tight ${
-          isFooter
-            ? "text-2xl text-[#25313B]"
-            : "text-2xl text-primary"
-        }`}
-      >
-        FreshCart
-      </span>
     </Link>
   );
 }

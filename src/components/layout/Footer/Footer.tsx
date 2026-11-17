@@ -47,12 +47,13 @@ export default function Footer({
   return (
     <footer className="bg-[#101828] text-white">
       {/* Main Footer */}
-      <div className="mx-auto max-w-[1504px] px-4 pt-12 pb-12">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[2.23fr_repeat(4,minmax(0,1fr))] lg:gap-10">
-          {/* Brand & Contact */}
+<div className="mx-auto max-w-[1536px] px-4 pt-12 pb-12">
+<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-[2.23fr_repeat(4,minmax(0,1fr))] lg:gap-12">            {/* Brand & Contact */}
           <div className="flex flex-col items-start">
             {/* Logo */}
-            <BrandLogo variant="navbar" />
+           <div className="mb-6">
+  <BrandLogo variant="footer" />
+</div>
 
             {/* Description */}
             <p className="mb-6 text-sm font-medium leading-[22.75px] text-[#99A1AF]">
@@ -65,7 +66,7 @@ export default function Footer({
             <div className="mb-6 flex flex-col gap-3">
               <a
                 href={footerContact.phoneHref}
-                className="flex items-center gap-3 text-sm font-medium text-[#99A1AF] transition-colors hover:text-white"
+                className="flex items-center gap-3 text-sm font-medium text-[#99A1AF] transition-colors duration-200 hover:text-primary"
               >
                 <Phone className="size-4 shrink-0 text-primary" />
                 {footerContact.phone}
@@ -73,7 +74,7 @@ export default function Footer({
 
               <a
                 href={footerContact.emailHref}
-                className="flex items-center gap-3 text-sm font-medium text-[#99A1AF] transition-colors hover:text-white"
+                className="flex items-center gap-3 text-sm font-medium text-[#99A1AF] transition-colors duration-200 hover:text-primary"
               >
                 <Mail className="size-4 shrink-0 text-primary" />
                 {footerContact.email}
