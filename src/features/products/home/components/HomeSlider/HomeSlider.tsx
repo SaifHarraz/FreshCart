@@ -11,8 +11,6 @@ import type { Swiper as SwiperInstance } from "swiper";
 
 import "swiper/css";
 import { Pagination } from "swiper/modules";
-
-import "swiper/css";
 import "swiper/css/pagination";
 import backgroundImage from "@/assets/images/home-slider-1.d79601a8.png";
 
