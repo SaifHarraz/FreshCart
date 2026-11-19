@@ -3,9 +3,9 @@ import Image from "next/image";
 import {
   Eye,
   Heart,
-  Scale,
-  ShoppingCart,
-} from "lucide-react";
+  Plus,
+  RefreshCw,
+} from "lucide-react";  
 import {
   FaStar,
   FaStarHalfStroke,
@@ -64,7 +64,7 @@ const partialStar = rating - fullStars;
 
         {/* Product Actions */}
         <div className="absolute top-3 right-3 flex flex-col gap-2">
-          {[Heart, Scale, Eye].map((Icon, index) => (
+          {[Heart, RefreshCw, Eye].map((Icon, index) => (
             <button
               key={index}
               type="button"
@@ -157,7 +157,7 @@ const partialStar = rating - fullStars;
             aria-label="Add to cart"
             className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#16A34A] text-white"
           >
-            <ShoppingCart className="size-5" />
+            <Plus className="size-5" />
           </button>
         </div>
       </div>
