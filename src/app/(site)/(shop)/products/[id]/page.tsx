@@ -1,4 +1,8 @@
+
 import { notFound } from "next/navigation";
+
+import ProductGallery from "@/features/products/components/ProductGallery/ProductGallery";
+import ProductInfo from "@/features/products/components/ProductInfo/ProductInfo";
 import { getProductById } from "@/features/products/services/products.service";
 
 interface ProductPageProps {
@@ -20,15 +24,11 @@ export default async function ProductPage({
 
   return (
     <main className="mx-auto w-full max-w-[1536px] px-4 py-8">
-      <h1 className="text-2xl font-bold">{product.title}</h1>
+      <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-[376px_minmax(0,1fr)]">
+        <ProductGallery product={product} />
 
-      <p className="mt-2 text-lg font-semibold">
-        {product.price} EGP
-      </p>
-
-      <p className="mt-4 text-muted-foreground">
-        {product.description}
-      </p>
+        <ProductInfo product={product} />
+      </div>
     </main>
   );
 }

@@ -6,3 +6,16 @@ export interface ProductsResultsCountProps {
 export interface ProductGalleryProps {
   product: Pick<Product, "title" | "imageCover" | "images">;
 }
+export interface ProductInfoProps {
+  product: Pick<
+    Product,
+    | "title"
+    | "price"
+    | "priceAfterDiscount"
+    | "quantity"
+    | "ratingsAverage"
+    | "ratingsQuantity"
+    | "category"
+    | "brand"
+  >;
+}
