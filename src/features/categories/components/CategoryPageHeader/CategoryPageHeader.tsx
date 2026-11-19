@@ -5,7 +5,7 @@ import { Layers3 } from "lucide-react";
 export default function CategoryPageHeader() {
   return (
     <section className="h-[228px] bg-gradient-to-r from-[#00A63E] via-[#00C875] to-[#00D492] md:h-[240px] lg:h-[180px]">
-      <div className="mx-auto h-full max-w-[1312px] px-4">
+      <div className="mx-auto h-full max-w-[1536px] px-4">
         <nav
           aria-label="Breadcrumb"
           className="flex items-center gap-2 pt-12 text-xs text-white md:pt-16 lg:pt-10"
