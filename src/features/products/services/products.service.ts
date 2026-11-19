@@ -22,12 +22,17 @@ export async function getProducts() {
   return result;
 }
 
+
 export async function getProductById(id: string) {
   const response = await fetch(`${PRODUCTS_API_URL}/${id}`, {
     next: {
       revalidate: 3600,
     },
   });
+
+  if (response.status === 404) {
+    return null;
+  }
 
   if (!response.ok) {
     throw new Error("Failed to fetch product");
@@ -37,3 +42,4 @@ export async function getProductById(id: string) {
 
   return result.data;
 }
+
