@@ -12,7 +12,7 @@ const promotions = [
     button: "Shop Now",
     href: "/products",
     gradient:
-      "bg-[linear-gradient(157.5deg,#00BC7D_0%,#007A55_100%)]",
+      "bg-[linear-gradient(147.34deg,#00BC7D_0%,#007A55_100%)]",
     buttonText: "text-[#009966]",
   },
   {
@@ -25,7 +25,7 @@ const promotions = [
     button: "Explore Now",
     href: "/products",
     gradient:
-      "bg-[linear-gradient(157.5deg,#FF8904_0%,#FF2056_100%)]",
+      "bg-[linear-gradient(147.34deg,#FF8904_0%,#FF2056_100%)]",
     buttonText: "text-[#FF6900]",
   },
 ];

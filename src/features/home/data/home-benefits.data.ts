@@ -12,7 +12,7 @@ export const homeBenefits = [
     description: "On orders over 500 EGP",
     icon: Truck,
     iconColor: "#2B7FFF",
-    iconBackground: "#FEF2F2",
+    iconBackground:  "#EFF6FF",
   },
   {
     id: "payment",
@@ -20,7 +20,7 @@ export const homeBenefits = [
     description: "100% secure transactions",
     icon: ShieldCheck,
     iconColor: "#10B981",
-    iconBackground: "#ECFDF5",
+    iconBackground:  "#ECFDF5",
   },
   {
     id: "returns",
@@ -28,7 +28,7 @@ export const homeBenefits = [
     description: "14-day return policy",
     icon: RotateCcw,
     iconColor: "#F97316",
-    iconBackground: "#F3F4F6",
+    iconBackground: "#FFF7ED",
   },
   {
     id: "support",
@@ -36,6 +36,6 @@ export const homeBenefits = [
     description: "Dedicated support team",
     icon: Headset,
     iconColor: "#A855F7",
-    iconBackground: "#F9FAFB",
+    iconBackground:  "#FAF5FF",
   },
 ];

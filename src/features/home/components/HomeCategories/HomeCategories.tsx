@@ -49,7 +49,7 @@ export default async function HomeCategories() {
                 />
               </div>
 
-              <h3 className="text-center text-base font-medium text-[#101828]">
+              <h3 className="text-center text-base font-medium text-[#364153]">
                 {category.name}
               </h3>
             </Link>

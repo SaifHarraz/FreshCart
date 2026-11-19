@@ -58,7 +58,7 @@ export default function HomeNewsletter() {
             className="
               relative flex flex-col gap-8 p-8
               lg:grid lg:grid-cols-[minmax(0,1.53fr)_minmax(0,1fr)]
-              lg:items-center lg:gap-8 lg:p-14
+              lg:items-start lg:gap-8 lg:p-14
             "
           >
             {/* Newsletter content */}
