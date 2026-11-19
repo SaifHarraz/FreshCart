@@ -1,5 +1,5 @@
-import HomeBenefits from "@/components/Home/HomeBenefits/HomeBenefits";
-import HomeSlider from "@/components/Home/HomeSlider/HomeSlider";
+import HomeBenefits from "@/features/home/components/HomeBenefits/HomeBenefits";
+import HomeSlider from "@/features/home/components/HomeSlider/HomeSlider";
 
 export default function HomePage() {
   return (
