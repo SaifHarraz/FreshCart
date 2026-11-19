@@ -3,7 +3,7 @@ import { getProducts } from "@/features/products/services/products.service";
 
 
 export default async function HomeProducts() {
-  const products = await getProducts();
+  const { data: products } = await getProducts();
 
   return (
     <section className="mx-auto w-full max-w-[1536px] px-4 py-8 md:px-8">

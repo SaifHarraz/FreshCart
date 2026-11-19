@@ -1,7 +1,11 @@
-export default function ProductsResultsCount() {
+import { ProductsResultsCountProps } from "../../types/product.types";
+
+export default function ProductsResultsCount({
+  total,
+}: ProductsResultsCountProps) {
   return (
     <p className="text-sm leading-5 text-[#6A7282]">
-      Showing 40 products
+      Showing {total} products
     </p>
   );
 }

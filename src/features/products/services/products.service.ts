@@ -4,7 +4,7 @@ const PRODUCTS_API_URL =
   "https://ecommerce.routemisr.com/api/v1/products";
 
 export async function getProducts() {
-  const response = await fetch(`${PRODUCTS_API_URL}?limit=40`, {
+  const response = await fetch(`${PRODUCTS_API_URL}`, {
     next: {
       revalidate: 3600,
     },
@@ -15,6 +15,5 @@ export async function getProducts() {
   }
 
   const result: ProductsResponse = await response.json();
-
-  return result.data;
+return result;
 }

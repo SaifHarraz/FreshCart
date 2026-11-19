@@ -29,10 +29,16 @@ export interface Product {
   };
 }
 
+export interface ProductsResultsCountProps {
+  total: number;
+}
 export interface ProductSubcategory {
   _id: string;
   name: string;
   slug: string;
   category: string;
+}
+export interface ProductGridProps {
+  products: Product[];
 }
 export type ProductsResponse = ListingResponse<Product>;
