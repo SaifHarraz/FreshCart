@@ -8,7 +8,7 @@ interface CategoryGridProps {
 
 export default function CategoryGrid({ categories }: CategoryGridProps) {
   return (
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-6">
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-5 md:gap-5">
       {categories.map((category) => (
         <CategoryListingCard
           key={category._id}
