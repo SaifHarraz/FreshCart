@@ -11,8 +11,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link
       href={`/categories/${category._id}`}
-      className="group flex flex-col items-center gap-3 rounded-lg bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-    >
+      className="rounded-lg bg-white p-4 category-card-shadow" >
       <div className="relative flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#F0FDF4]">
         <Image
           src={category.image}

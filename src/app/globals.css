@@ -211,3 +211,18 @@ html::-webkit-scrollbar-button:vertical:increment {
   width: 32px;
   opacity: 1;
 }
+@layer utilities {
+  .category-card-shadow {
+    box-shadow:
+      0px 4px 8px 0px rgba(0, 0, 0, 0.1),
+      0px 2px 4px -1px rgba(0, 0, 0, 0.08);
+
+    transition: box-shadow 200ms ease-out;
+  }
+
+  .category-card-shadow:hover {
+    box-shadow:
+      0px 6px 12px 0px rgba(0, 0, 0, 0.12),
+      0px 3px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+}
