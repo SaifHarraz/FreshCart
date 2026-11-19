@@ -1,4 +1,3 @@
-
 export interface HomeSliderAction {
   label: string;
   href: string;

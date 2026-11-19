@@ -1,4 +1,4 @@
-import { homeBenefits } from "../../data/homeBenefits.data";
+import { homeBenefits } from "../../data/home-benefits.data";
 
 export default function HomeBenefits() {
   return (

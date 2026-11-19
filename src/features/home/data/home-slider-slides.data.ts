@@ -1,8 +1,4 @@
-import { HomeSliderSlide } from "../types/types";
-
-
-
-
+import type { HomeSliderSlide } from "../types/home.types";
 export const homeSliderSlides: HomeSliderSlide[] = [
   {
     id: "fresh-products",

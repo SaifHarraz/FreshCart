@@ -13,7 +13,7 @@ import "swiper/css";
 import { Pagination } from "swiper/modules";
 import "swiper/css/pagination";
 import backgroundImage from "@/assets/images/home-slider-1.d79601a8.png";
-import { homeSliderSlides } from "../../data/homeSliderSlides.data";
+import { homeSliderSlides } from "../../data/home-slider-slides.data";
 
 
 export default function HomeSlider() {
