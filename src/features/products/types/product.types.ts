@@ -36,6 +36,10 @@ export interface ProductSubcategory {
   slug: string;
   category: string;
 }
+export interface ProductResponse {
+  status: string;
+  data: Product;
+}
 export interface ProductGridProps {
   products: Product[];
 }
