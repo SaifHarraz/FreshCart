@@ -4,11 +4,11 @@ import { ShoppingBasket } from "lucide-react";
 
 export default function ProductPageHeader() {
   return (
-    <section className="h-[224px] bg-gradient-to-br from-[#00A63E] via-[#00C875] to-[#00D492]">
-      <div className="mx-auto h-full max-w-[1536px] px-4">
+<section className="h-[212px] bg-gradient-to-br from-[#00A63E] via-[#00C875] to-[#00D492] md:h-[224px]">
+        <div className="mx-auto h-full max-w-[1536px] px-4">
         <nav
           aria-label="Breadcrumb"
-          className="flex items-center gap-2 pt-14 text-sm text-white"
+         className="flex items-center gap-2 pt-10 text-sm text-white md:pt-14"
         >
           <Link href="/" className="transition-opacity hover:opacity-80">
             Home
