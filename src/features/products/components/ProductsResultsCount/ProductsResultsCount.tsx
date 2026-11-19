@@ -1,4 +1,4 @@
-import { ProductsResultsCountProps } from "../../types/product.types";
+import { ProductsResultsCountProps } from "../../types/product-page.types";
 
 export default function ProductsResultsCount({
   total,

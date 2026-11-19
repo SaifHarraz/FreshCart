@@ -29,9 +29,7 @@ export interface Product {
   };
 }
 
-export interface ProductsResultsCountProps {
-  total: number;
-}
+
 export interface ProductSubcategory {
   _id: string;
   name: string;
