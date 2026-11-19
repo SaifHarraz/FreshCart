@@ -12,19 +12,23 @@ export default async function HomeCategories() {
     <section className="px-4 py-8">
       <div className="mx-auto max-w-[1536px]">
         {/* Section Header */}
-        <div className="mb-8 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold text-[#101828]">
-            Shop By <span className="text-primary">Category</span>
-          </h2>
+        <div className="flex w-full items-center justify-between">
+  <div className="flex items-center gap-3 py-8">
+    <span className="h-8 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-[#00BC7D] to-[#007A55]" />
 
-          <Link
-            href="/categories"
-            className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-primary/80"
-          >
-            View All Categories
-            <ChevronRight className="size-4" />
-          </Link>
-        </div>
+    <h2 className="text-[30px] leading-9 font-bold text-[#1E2939]">
+      Shop By <span className="text-[#009966]">Category</span>
+    </h2>
+  </div>
+
+  <Link
+    href="/categories"
+    className="inline-flex items-center text-base font-medium text-[#16A34A]"
+  >
+    View All Categories
+    <ChevronRight className="ml-2 size-5" />
+  </Link>
+</div>
 
         {/* Categories Grid */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
