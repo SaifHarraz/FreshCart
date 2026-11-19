@@ -1,3 +1,9 @@
+import ProductPageHeader from "@/features/categories/components/ProductPageHeader/ProductPageHeader"
+
 export default function Page() {
-  return <main></main>;
+  return (<>
+  <ProductPageHeader/>
+  <main>
+
+  </main></>);
 }
