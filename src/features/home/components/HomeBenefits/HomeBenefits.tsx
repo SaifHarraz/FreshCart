@@ -1,4 +1,5 @@
-import { homeBenefits } from "../../data/data";
+import { homeBenefits } from "../../data/homeBenefits.data";
+
 export default function HomeBenefits() {
   return (
     <section className="bg-[#F9FAFB] px-4 py-8">
