@@ -19,3 +19,6 @@ export interface ProductInfoProps {
     | "brand"
   >;
 }
+export interface ProductBreadcrumbProps {
+  product: Pick<Product, "title" | "category" | "subcategory">;
+}
