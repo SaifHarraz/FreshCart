@@ -1,5 +1,6 @@
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Eye,
   Heart,
@@ -43,8 +44,13 @@ const partialStar = rating - fullStars;
     : 0;
 
   return (
-    <article className="overflow-hidden rounded-lg border border-[#E5E7EB] bg-white">
-      {/* Product Image */}
+<article className="group relative cursor-pointer overflow-hidden rounded-lg border border-[#E5E7EB] bg-white">
+  <Link
+  href={`/products/${product._id}`}
+  aria-label={`View ${product.title} details`}
+  className="absolute inset-0 z-10 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#16A34A]"
+/>
+        {/* Product Image */}
       <div className="relative h-[240px] bg-white">
         <Image
           src={product.imageCover}
@@ -63,7 +69,7 @@ const partialStar = rating - fullStars;
         )}
 
         {/* Product Actions */}
-        <div className="absolute top-3 right-3 flex flex-col gap-2">
+        <div className="absolute top-3 right-3 z-20 flex flex-col gap-2">
           {[Heart, RefreshCw, Eye].map((Icon, index) => (
             <button
               key={index}

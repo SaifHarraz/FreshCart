@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { Category } from "../../types/category.types";
 
-import type { Category } from "../types/category.types";
+
 
 interface CategoryCardProps {
   category: Category;
@@ -11,7 +12,7 @@ export default function CategoryCard({ category }: CategoryCardProps) {
   return (
     <Link
       href={`/categories/${category._id}`}
-      className="rounded-lg bg-white p-4 category-card-shadow" >
+      className="group rounded-lg bg-white p-4 category-card-shadow" >
       <div className="relative flex size-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#F0FDF4]">
         <Image
           src={category.image}
