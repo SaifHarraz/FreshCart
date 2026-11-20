@@ -1,4 +1,3 @@
-
 "use client";
 
 import {
@@ -6,7 +5,6 @@ import {
   CheckCircle2,
   Package,
   RotateCcw,
-  ShieldCheck,
   Star,
   Truck,
 } from "lucide-react";
@@ -22,7 +20,7 @@ import type { ProductTabsProps } from "@/features/products/types/product-tabs.ty
 
 function RatingStars({ rating }: { rating: number }) {
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1" aria-label={`${rating} out of 5 stars`}>
       {Array.from({ length: 5 }, (_, index) => (
         <Star
           key={index}
@@ -50,37 +48,41 @@ function ReviewCard({
     .toUpperCase();
 
   return (
-    <article className="rounded-xl border border-gray-200 bg-white p-5">
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex min-w-0 items-center gap-3">
-          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-green-50 text-sm font-semibold text-green-700">
-            {initials}
-          </div>
-
-          <div className="min-w-0">
-            <h4 className="truncate text-sm font-semibold text-gray-900">
-              {review.user.name}
-            </h4>
-            <p className="mt-1 text-xs text-gray-400">
-              {new Date(review.createdAt).toLocaleDateString()}
-            </p>
-          </div>
+    <article className="py-5 first:pt-0 last:pb-0">
+      <div className="flex items-start gap-3">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#F0FDF4] text-sm font-semibold text-[#15803D]">
+          {initials}
         </div>
 
-        <RatingStars rating={review.rating} />
-      </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+            <div className="min-w-0">
+              <h4 className="truncate text-sm font-semibold text-[#101828]">
+                {review.user.name}
+              </h4>
+              <p className="mt-1 text-xs text-[#8A929E]">
+                {new Date(review.createdAt).toLocaleDateString(undefined, {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </p>
+            </div>
 
-      <p className="mt-4 line-clamp-4 break-words text-sm leading-6 text-gray-600">
-        {review.review}
-      </p>
+            <RatingStars rating={review.rating} />
+          </div>
+
+          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-[#4A5565]">
+            {review.review}
+          </p>
+        </div>
+      </div>
     </article>
   );
 }
 
-function ProductDetails({
-  product,
-}: Pick<ProductTabsProps, "product">) {
-  const information = [
+function ProductDetails({ product }: Pick<ProductTabsProps, "product">) {
+  const information: [string, string][] = [
     ["Category", product.category.name],
     [
       "Subcategory",
@@ -98,58 +100,54 @@ function ProductDetails({
   ];
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h3 className="mb-3 text-lg font-semibold text-gray-900">
+    <div className="space-y-6">
+      <div className="space-y-3">
+        <h3 className="text-lg font-semibold leading-7 text-[#101828]">
           About this Product
         </h3>
-        <p className="max-w-4xl text-sm leading-7 text-gray-600">
+        <p className="text-base font-medium leading-[26px] text-[#4A5565]">
           {product.description}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-        <div className="rounded-xl bg-gray-50 p-5">
-          <div className="mb-5 flex items-center gap-3">
-            <Package className="size-5 text-primary" />
-            <h3 className="font-semibold text-gray-900">
-              Product Information
-            </h3>
-          </div>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <section className="flex flex-col gap-3 rounded-lg bg-[#F9FAFB] p-4">
+          <h4 className="text-base font-medium leading-6 text-[#101828]">
+            Product Information
+          </h4>
 
-          <dl className="space-y-4">
+          <dl className="space-y-2">
             {information.map(([label, value]) => (
               <div
                 key={label}
-                className="flex justify-between gap-4 text-sm"
+                className="flex items-start justify-between gap-4 text-sm leading-5"
               >
-                <dt className="text-gray-500">{label}</dt>
-                <dd className="text-right font-medium text-gray-900">
+                <dt className="shrink-0 text-[#6A7282]">{label}</dt>
+                <dd className="text-right font-medium text-[#101828]">
                   {value}
                 </dd>
               </div>
             ))}
           </dl>
-        </div>
+        </section>
 
-        <div className="rounded-xl bg-gray-50 p-5">
-          <div className="mb-5 flex items-center gap-3">
-            <ShieldCheck className="size-5 text-primary" />
-            <h3 className="font-semibold text-gray-900">Key Features</h3>
-          </div>
+        <section className="flex flex-col gap-3 rounded-lg bg-[#F9FAFB] p-4">
+          <h4 className="text-base font-medium leading-6 text-[#101828]">
+            Key Features
+          </h4>
 
-          <ul className="space-y-4">
+          <ul className="space-y-2">
             {features.map((feature) => (
               <li
                 key={feature}
-                className="flex items-center gap-3 text-sm text-gray-700"
+                className="flex items-center gap-2 text-sm leading-5 text-[#4A5565]"
               >
-                <CheckCircle2 className="size-4 shrink-0 text-primary" />
-                {feature}
+                <CheckCircle2 className="size-4 shrink-0 fill-[#16A34A] text-white" />
+                <span>{feature}</span>
               </li>
             ))}
           </ul>
-        </div>
+        </section>
       </div>
     </div>
   );
@@ -160,46 +158,59 @@ function ReviewsContent({
   reviewsResponse,
 }: ProductTabsProps) {
   return (
-    <div className="space-y-6">
-      {/* Rating summary */}
-      <div className="flex flex-wrap items-center gap-6 rounded-xl bg-gray-50 p-5">
-        <div>
-          <p className="text-sm text-gray-500">Overall Rating</p>
-          <div className="mt-1 flex items-center gap-2">
-            <span className="text-4xl font-semibold text-gray-900">
-              {product.ratingsAverage.toFixed(1)}
-            </span>
-            <span className="text-sm text-gray-400">/ 5</span>
-          </div>
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
+      <aside className="h-fit rounded-lg bg-[#F9FAFB] p-5 lg:sticky lg:top-6">
+        <p className="text-sm font-medium text-[#4A5565]">Customer rating</p>
+
+        <div className="mt-3 flex items-end gap-2">
+          <span className="text-5xl font-semibold tracking-tight text-[#101828]">
+            {product.ratingsAverage.toFixed(1)}
+          </span>
+          <span className="mb-1 text-sm text-[#8A929E]">out of 5</span>
+        </div>
+
+        <div className="mt-3">
           <RatingStars rating={product.ratingsAverage} />
         </div>
 
-        <div className="h-14 w-px bg-gray-200" />
+        <p className="mt-3 text-sm leading-5 text-[#6A7282]">
+          Based on {reviewsResponse.results.toLocaleString()} customer{" "}
+          {reviewsResponse.results === 1 ? "review" : "reviews"}
+        </p>
+      </aside>
 
-        <div>
-          <p className="text-2xl font-semibold text-gray-900">
-            {reviewsResponse.results.toLocaleString()}
-          </p>
-          <p className="text-sm text-gray-500">Customer Reviews</p>
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E5E7EB] pb-4">
+          <div>
+            <h3 className="text-lg font-semibold text-[#101828]">
+              Customer Reviews
+            </h3>
+            <p className="mt-1 text-sm text-[#8A929E]">
+              What customers are saying about this product
+            </p>
+          </div>
+          <span className="rounded-full bg-[#F3F4F6] px-3 py-1 text-xs font-medium text-[#4A5565]">
+            {reviewsResponse.results.toLocaleString()}{" "}
+            {reviewsResponse.results === 1 ? "review" : "reviews"}
+          </span>
         </div>
-      </div>
 
-      {/* Scrollable reviews area */}
-      <div className="max-h-[600px] overflow-y-auto overscroll-contain pr-2">
         {reviewsResponse.data.length > 0 ? (
-          <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+          <div className="divide-y divide-[#E5E7EB]">
             {reviewsResponse.data.map((review) => (
               <ReviewCard key={review._id} review={review} />
             ))}
           </div>
         ) : (
-          <div className="rounded-xl border border-dashed border-gray-200 py-12 text-center">
-            <Star className="mx-auto size-8 text-gray-300" />
-            <h3 className="mt-3 font-semibold text-gray-900">
+          <div className="flex flex-col items-center justify-center py-14 text-center">
+            <div className="flex size-12 items-center justify-center rounded-full bg-[#F3F4F6] text-[#9CA3AF]">
+              <Star className="size-5 fill-current" />
+            </div>
+            <h4 className="mt-4 font-semibold text-[#101828]">
               No reviews yet
-            </h3>
-            <p className="mt-1 text-sm text-gray-500">
-              Be the first to review this product.
+            </h4>
+            <p className="mt-1 max-w-xs text-sm leading-6 text-[#6A7282]">
+              There are no customer reviews for this product yet.
             </p>
           </div>
         )}
@@ -231,210 +242,89 @@ function ShippingContent() {
   ];
 
   return (
-    <div>
-      <h3 className="mb-2 text-lg font-semibold text-gray-900">
-        Shipping & Returns
-      </h3>
-      <p className="mb-6 text-sm text-gray-500">
-        Everything you need to know about your order.
-      </p>
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-lg font-semibold leading-7 text-[#101828]">
+          Shipping & Returns
+        </h3>
+        <p className="mt-2 text-sm leading-5 text-[#6A7282]">
+          Everything you need to know about your order.
+        </p>
+      </div>
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {items.map(({ icon: Icon, title, description }) => (
-          <div
+          <article
             key={title}
-            className="rounded-xl border border-gray-200 bg-white p-5"
+            className="rounded-lg border border-[#E5E7EB] bg-white p-5"
           >
-            <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-green-50 text-primary">
-              <Icon className="size-5" />
+            <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-[#DCFCE7] text-[#15803D]">
+              <Icon className="size-5 fill-current" strokeWidth={1.8} />
             </div>
-            <h4 className="font-semibold text-gray-900">{title}</h4>
-            <p className="mt-2 text-sm leading-6 text-gray-500">
+            <h4 className="font-semibold text-[#101828]">{title}</h4>
+            <p className="mt-2 text-sm leading-6 text-[#4A5565]">
               {description}
             </p>
-          </div>
+          </article>
         ))}
       </div>
     </div>
   );
 }
 
-
 export default function ProductTabs({
   product,
   reviewsResponse,
 }: ProductTabsProps) {
   return (
-    <section className="mt-16 w-full">
-      <div className="overflow-hidden rounded-xl border border-gray-200 bg-white">
+    <section className="mt-14 w-full">
+      <div className="overflow-hidden rounded-lg border border-[#E5E7EB] bg-white shadow-[0px_1px_3px_0px_rgba(0,0,0,0.1),0px_1px_2px_-1px_rgba(0,0,0,0.1)]">
         <Tabs defaultValue="details" className="w-full gap-0">
           <TabsList
             variant="line"
-            className="flex h-[58px] w-full justify-start gap-0 overflow-x-auto rounded-none border-b border-gray-200 bg-white p-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex h-[73px] w-full justify-start gap-0 overflow-x-auto rounded-none border-b border-[#E5E7EB] bg-white p-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:h-[58px]"
           >
             <TabsTrigger
               value="details"
-              className="h-full flex-none gap-2 rounded-none border-0 px-4 py-4 text-sm font-medium text-gray-500 shadow-none after:bottom-[-1px] after:bg-primary after:opacity-0 data-active:text-primary data-active:after:opacity-100 sm:px-6"
+              className="h-full flex-none gap-2 rounded-none border-0 px-6 py-4 text-base font-medium text-[#4A5565] shadow-none after:bottom-[-1px] after:bg-[#16A34A] after:opacity-0 data-active:!bg-[#F0FDF4]/50 data-active:text-[#16A34A] data-active:after:opacity-100"
             >
-              <Package className="size-4 shrink-0" />
+              <Package className="size-[18px] shrink-0 fill-current" strokeWidth={1.8} />
               <span>Product Details</span>
             </TabsTrigger>
 
             <TabsTrigger
               value="reviews"
-              className="h-full flex-none gap-2 rounded-none border-0 px-4 py-4 text-sm font-medium text-gray-500 shadow-none after:bottom-[-1px] after:bg-primary after:opacity-0 data-active:text-primary data-active:after:opacity-100 sm:px-6"
+              className="h-full flex-none gap-2 rounded-none border-0 px-6 py-4 text-base font-medium text-[#4A5565] shadow-none after:bottom-[-1px] after:bg-[#16A34A] after:opacity-0 data-active:!bg-[#F0FDF4]/50 data-active:text-[#16A34A] data-active:after:opacity-100"
             >
-              <Star className="size-4 shrink-0" />
+              <Star className="size-[18px] shrink-0 fill-current" strokeWidth={1.8} />
               <span>Reviews ({reviewsResponse.results})</span>
             </TabsTrigger>
 
             <TabsTrigger
               value="shipping"
-              className="h-full flex-none gap-2 rounded-none border-0 px-4 py-4 text-sm font-medium text-gray-500 shadow-none after:bottom-[-1px] after:bg-primary after:opacity-0 data-active:text-primary data-active:after:opacity-100 sm:px-6"
+              className="h-full flex-none gap-2 rounded-none border-0 px-6 py-4 text-base font-medium text-[#4A5565] shadow-none after:bottom-[-1px] after:bg-[#16A34A] after:opacity-0 data-active:!bg-[#F0FDF4]/50 data-active:text-[#16A34A] data-active:after:opacity-100"
             >
-              <Truck className="size-4 shrink-0" />
+              <Truck className="size-[18px] shrink-0 fill-current" strokeWidth={1.8} />
               <span>Shipping & Returns</span>
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="details" className="m-0 p-4 sm:p-6">
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold leading-7 text-gray-900">
-                  About this Product
-                </h3>
-                <p className="mt-3 max-w-none text-sm leading-6 text-gray-600">
-                  {product.description}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <h4 className="mb-4 text-sm font-semibold leading-5 text-gray-900">
-                    Product Information
-                  </h4>
-
-                  <dl className="space-y-2">
-                    {[
-                      ["Category", product.category.name],
-                      [
-                        "Subcategory",
-                        product.subcategory.map((item) => item.name).join(", ") || "—",
-                      ],
-                      ["Brand", product.brand.name],
-                      ["Items Sold", product.sold.toLocaleString()],
-                    ].map(([label, value]) => (
-                      <div
-                        key={label}
-                        className="flex items-start justify-between gap-4 text-sm leading-5"
-                      >
-                        <dt className="text-gray-600">{label}</dt>
-                        <dd className="text-right font-medium text-gray-900">
-                          {value}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </div>
-
-                <div className="rounded-lg bg-gray-50 p-4">
-                  <h4 className="mb-4 text-sm font-semibold leading-5 text-gray-900">
-                    Key Features
-                  </h4>
-
-                  <ul className="space-y-2">
-                    {[
-                      "Premium Quality Product",
-                      "100% Authentic Guarantee",
-                      "Fast & Secure Packaging",
-                      "Quality Tested",
-                    ].map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-center gap-2 text-sm leading-5 text-gray-700"
-                      >
-                        <CheckCircle2 className="size-4 shrink-0 text-primary" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </div>
+          <TabsContent value="details" className="m-0 p-6">
+            <ProductDetails product={product} />
           </TabsContent>
 
-          {/* Reviews intentionally left unchanged */}
-          <TabsContent value="reviews" className="m-0 p-4 sm:p-6">
-            <ReviewsSection
+          <TabsContent value="reviews" className="m-0 p-6">
+            <ReviewsContent
               product={product}
-              initialResponse={reviewsResponse}
+              reviewsResponse={reviewsResponse}
             />
           </TabsContent>
 
-          <TabsContent value="shipping" className="m-0 p-4 sm:p-6">
-            <div className="space-y-6">
-              <SectionHeading
-                title="Shipping & Returns"
-                description="Helpful information about receiving your order and getting assistance when you need it."
-              />
-
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div className="rounded-lg border border-gray-200 p-5">
-                  <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-green-50 text-primary">
-                    <Truck className="size-5" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-gray-900">
-                    Delivery Information
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-gray-600">
-                    Available delivery methods, costs, and estimated arrival
-                    information are presented during checkout.
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-xs font-medium text-gray-600">
-                    <Clock3 className="size-4 text-primary" />
-                    Check estimated delivery at checkout
-                  </div>
-                </div>
-
-                <div className="rounded-lg border border-gray-200 p-5">
-                  <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-green-50 text-primary">
-                    <RotateCcw className="size-5" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-gray-900">
-                    Returns & Exchanges
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-gray-600">
-                    Return and exchange conditions depend on the applicable
-                    store policy and product eligibility.
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-xs font-medium text-gray-600">
-                    <ShieldCheck className="size-4 text-primary" />
-                    Review the applicable return policy
-                  </div>
-                </div>
-
-                <div className="rounded-lg border border-gray-200 p-5 md:col-span-2 lg:col-span-1">
-                  <div className="mb-4 flex size-10 items-center justify-center rounded-lg bg-green-50 text-primary">
-                    <PackageCheck className="size-5" />
-                  </div>
-                  <h3 className="text-sm font-semibold text-gray-900">
-                    Order Assistance
-                  </h3>
-                  <p className="mt-2 text-sm leading-6 text-gray-600">
-                    Need help with an order? Contact customer support for
-                    assistance with delivery or order-related questions.
-                  </p>
-                  <div className="mt-4 flex items-center gap-2 text-xs font-medium text-gray-600">
-                    <BadgeCheck className="size-4 text-primary" />
-                    Customer support
-                  </div>
-                </div>
-              </div>
-            </div>
+          <TabsContent value="shipping" className="m-0 p-6">
+            <ShippingContent />
           </TabsContent>
         </Tabs>
       </div>
     </section>
   );
 }
-
