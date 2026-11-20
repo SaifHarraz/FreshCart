@@ -43,9 +43,17 @@ export async function getProductById(id: string) {
 
   return result.data;
 }
-export async function getProductReviews(productId: string) {
+
+export async function getProductReviews(
+  productId: string,
+  
+) {
+  const params = new URLSearchParams({
+    sort: "-createdAt,-rating",
+  });
+
   const response = await fetch(
-    `${PRODUCTS_API_URL}/${productId}/reviews`,
+    `${PRODUCTS_API_URL}/${productId}/reviews?${params.toString()}`,
     {
       next: {
         revalidate: 60,
@@ -61,3 +69,4 @@ export async function getProductReviews(productId: string) {
 
   return result;
 }
+

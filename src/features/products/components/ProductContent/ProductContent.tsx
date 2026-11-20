@@ -39,11 +39,7 @@ export default async function ProductContent({ params }: ProductPageProps) {
         <ProductGallery product={product} />
         <ProductInfo product={product} />
       </div>
-      <ProductTabs
-        product={product}
-        reviews={reviewsResponse.data}
-        reviewsCount={reviewsResponse.results}
-      />
+      <ProductTabs product={product} reviewsResponse={reviewsResponse} />
     </>
   );
 }
