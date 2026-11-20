@@ -8,7 +8,7 @@ import {
   Star,
   Truck,
 } from "lucide-react";
-
+import { FaStar } from "react-icons/fa6";
 import {
   Tabs,
   TabsContent,
@@ -18,22 +18,40 @@ import {
 
 import type { ProductTabsProps } from "@/features/products/types/product-tabs.types";
 
+
 function RatingStars({ rating }: { rating: number }) {
+  const safeRating = Number.isFinite(rating)
+    ? Math.min(5, Math.max(0, rating))
+    : 0;
+
   return (
-    <div className="flex items-center gap-1" aria-label={`${rating} out of 5 stars`}>
-      {Array.from({ length: 5 }, (_, index) => (
-        <Star
-          key={index}
-          className={`size-4 ${
-            index < Math.round(rating)
-              ? "fill-amber-400 text-amber-400"
-              : "fill-gray-200 text-gray-200"
-          }`}
-        />
-      ))}
+    <div
+      className="flex items-center gap-1"
+      aria-label={`${safeRating.toFixed(1)} out of 5 stars`}
+    >
+      {Array.from({ length: 5 }).map((_, index) => {
+        const fillPercentage = Math.min(
+          100,
+          Math.max(0, (safeRating - index) * 100)
+        );
+
+        return (
+          <span key={index} className="relative inline-flex">
+            <FaStar className="size-4 text-[#E5E7EB]" />
+
+            <span
+              className="absolute inset-0 overflow-hidden"
+              style={{ width: `${fillPercentage}%` }}
+            >
+              <FaStar className="size-4 max-w-none text-[#FACC15]" />
+            </span>
+          </span>
+        );
+      })}
     </div>
   );
 }
+
 
 function ReviewCard({
   review,
@@ -48,18 +66,19 @@ function ReviewCard({
     .toUpperCase();
 
   return (
-    <article className="py-5 first:pt-0 last:pb-0">
+    <article className="rounded-lg border border-[#E5E7EB] bg-white p-4 transition-colors hover:border-[#D1D5DB] sm:p-5">
       <div className="flex items-start gap-3">
         <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#F0FDF4] text-sm font-semibold text-[#15803D]">
           {initials}
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="min-w-0">
               <h4 className="truncate text-sm font-semibold text-[#101828]">
                 {review.user.name}
               </h4>
+
               <p className="mt-1 text-xs text-[#8A929E]">
                 {new Date(review.createdAt).toLocaleDateString(undefined, {
                   year: "numeric",
@@ -69,10 +88,15 @@ function ReviewCard({
               </p>
             </div>
 
-            <RatingStars rating={review.rating} />
+            <div className="flex items-center gap-2 rounded-md bg-[#FFFBEB] px-2.5 py-1">
+              <RatingStars rating={review.rating} />
+              <span className="text-xs font-semibold text-[#92400E]">
+                {review.rating.toFixed(1)}
+              </span>
+            </div>
           </div>
 
-          <p className="mt-3 whitespace-pre-line break-words text-sm leading-6 text-[#4A5565]">
+          <p className="mt-4 line-clamp-3 whitespace-pre-line break-words text-sm leading-6 text-[#4A5565]">
             {review.review}
           </p>
         </div>
@@ -80,6 +104,7 @@ function ReviewCard({
     </article>
   );
 }
+
 
 function ProductDetails({ product }: Pick<ProductTabsProps, "product">) {
   const information: [string, string][] = [
@@ -153,71 +178,112 @@ function ProductDetails({ product }: Pick<ProductTabsProps, "product">) {
   );
 }
 
+
+
 function ReviewsContent({
   product,
   reviewsResponse,
 }: ProductTabsProps) {
+  const hasRatings =
+    product.ratingsQuantity > 0 &&
+    Number.isFinite(product.ratingsAverage);
+
+  const rating = hasRatings
+    ? Math.min(5, Math.max(0, product.ratingsAverage))
+    : 0;
+
   return (
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-10">
-      <aside className="h-fit rounded-lg bg-[#F9FAFB] p-5 lg:sticky lg:top-6">
-        <p className="text-sm font-medium text-[#4A5565]">Customer rating</p>
+    <div className="space-y-6">
+      {/* Full-width Rating Overview */}
+      <section className="rounded-lg border border-[#E5E7EB] bg-[#F9FAFB] p-5 sm:p-6">
+        <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p className="text-sm font-medium text-[#4A5565]">
+              Overall Customer Rating
+            </p>
 
-        <div className="mt-3 flex items-end gap-2">
-          <span className="text-5xl font-semibold tracking-tight text-[#101828]">
-            {product.ratingsAverage.toFixed(1)}
-          </span>
-          <span className="mb-1 text-sm text-[#8A929E]">out of 5</span>
+            {hasRatings ? (
+              <>
+                <div className="mt-2 flex items-end gap-2">
+                  <span className="text-5xl font-semibold tracking-tight text-[#101828]">
+                    {rating.toFixed(1)}
+                  </span>
+                  <span className="mb-1 text-sm text-[#8A929E]">
+                    out of 5
+                  </span>
+                </div>
+
+                <div className="mt-3">
+                  <RatingStars rating={rating} />
+                </div>
+              </>
+            ) : (
+              <p className="mt-3 text-sm text-[#98A2B3]">
+                No ratings yet
+              </p>
+            )}
+          </div>
+
+          <div className="border-t border-[#E5E7EB] pt-4 sm:border-l sm:border-t-0 sm:pl-8 sm:pt-0">
+            <p className="text-3xl font-semibold text-[#101828]">
+              {product.ratingsQuantity.toLocaleString()}
+            </p>
+
+            <p className="mt-1 text-sm text-[#6A7282]">
+              {product.ratingsQuantity === 1
+                ? "Customer review"
+                : "Customer reviews"}
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div className="mt-3">
-          <RatingStars rating={product.ratingsAverage} />
-        </div>
-
-        <p className="mt-3 text-sm leading-5 text-[#6A7282]">
-          Based on {reviewsResponse.results.toLocaleString()} customer{" "}
-          {reviewsResponse.results === 1 ? "review" : "reviews"}
-        </p>
-      </aside>
-
-      <div className="min-w-0">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-[#E5E7EB] pb-4">
+      {/* Reviews List */}
+      <section>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <div>
             <h3 className="text-lg font-semibold text-[#101828]">
               Customer Reviews
             </h3>
+
             <p className="mt-1 text-sm text-[#8A929E]">
               What customers are saying about this product
             </p>
           </div>
-          <span className="rounded-full bg-[#F3F4F6] px-3 py-1 text-xs font-medium text-[#4A5565]">
+
+          <span className="rounded-full bg-[#F3F4F6] px-3 py-1.5 text-xs font-medium text-[#4A5565]">
             {reviewsResponse.results.toLocaleString()}{" "}
             {reviewsResponse.results === 1 ? "review" : "reviews"}
           </span>
         </div>
 
         {reviewsResponse.data.length > 0 ? (
-          <div className="divide-y divide-[#E5E7EB]">
+          <div className="max-h-[440px] space-y-3 overflow-y-auto overscroll-contain pr-2 [scrollbar-color:#D1D5DB_transparent] [scrollbar-width:thin]">
             {reviewsResponse.data.map((review) => (
               <ReviewCard key={review._id} review={review} />
             ))}
           </div>
         ) : (
-          <div className="flex flex-col items-center justify-center py-14 text-center">
+          <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-[#D1D5DB] py-14 text-center">
             <div className="flex size-12 items-center justify-center rounded-full bg-[#F3F4F6] text-[#9CA3AF]">
               <Star className="size-5 fill-current" />
             </div>
+
             <h4 className="mt-4 font-semibold text-[#101828]">
               No reviews yet
             </h4>
+
             <p className="mt-1 max-w-xs text-sm leading-6 text-[#6A7282]">
               There are no customer reviews for this product yet.
             </p>
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }
+
+
 
 function ShippingContent() {
   const items = [
