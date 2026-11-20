@@ -8,11 +8,33 @@ import {
   Plus,
   ShoppingCart,
   Zap,
+  Share2,
+  Truck,
+  RotateCcw,
+  ShieldCheck,
 } from "lucide-react";
 import { FaStar } from "react-icons/fa6";
 
 import { Button } from "@/components/ui/button";
 import type { ProductInfoProps } from "../../types/product-page.types";
+
+const benefits = [
+  {
+    icon: Truck,
+    title: "Free Delivery",
+    description: "Orders over $550",
+  },
+  {
+    icon: RotateCcw,
+    title: "30 Days Return",
+    description: "Money back",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Secure Payment",
+    description: "100% Protected",
+  },
+];
 
 export default function ProductInfo({ product }: ProductInfoProps) {
   const [quantity, setQuantity] = useState(1);
@@ -43,20 +65,20 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   };
 
   return (
-    <section className="h-fit rounded-xl bg-white p-6 shadow-sm">
+    <section className="flex h-fit flex-col rounded-xl bg-white p-6 shadow-sm md:min-h-[776px]">
       {/* Category and Brand */}
       <div className="flex flex-wrap items-center gap-2">
-        <span className="rounded-md bg-[#ECFDF5] px-3 py-1.5 text-sm font-medium text-[#16A34A]">
+        <span className="rounded-full bg-[#F0FDF4] px-3 py-1.5 text-xs font-medium text-[#15803D]">
           {product.category.name}
         </span>
 
-        <span className="rounded-md bg-[#F3F4F6] px-3 py-1.5 text-sm font-medium text-[#364153]">
+        <span className="rounded-full bg-[#F3F4F6] px-3 py-1.5 text-xs font-medium text-[#364153]">
           {product.brand.name}
         </span>
       </div>
 
       {/* Title */}
-      <h1 className="mt-6 text-2xl leading-9 font-bold text-[#1E2939]">
+      <h1 className="mt-4 text-2xl leading-9 font-bold text-[#101828] md:text-[30px]">
         {product.title}
       </h1>
 
@@ -64,7 +86,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       <div className="mt-3 flex items-center gap-3">
         {hasRatings ? (
           <>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-0.5">
               {Array.from({ length: 5 }).map((_, index) => (
                 <FaStar
                   key={index}
@@ -77,20 +99,18 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               ))}
             </div>
 
-            <span className="text-sm text-[#6A7282]">
+            <span className="text-sm text-[#4A5565]">
               {rating.toFixed(1)} ({product.ratingsQuantity} reviews)
             </span>
           </>
         ) : (
-          <span className="text-sm text-[#98A2B3]">
-            No reviews yet
-          </span>
+          <span className="text-sm text-[#98A2B3]">No reviews yet</span>
         )}
       </div>
 
       {/* Price */}
-      <div className="mt-4 flex flex-wrap items-center gap-3">
-        <span className="text-3xl leading-10 font-bold text-[#16A34A]">
+      <div className="mt-5 flex flex-wrap items-center gap-3">
+        <span className="text-[30px] leading-9 font-bold text-[#101828]">
           {unitPrice} EGP
         </span>
 
@@ -102,107 +122,145 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       </div>
 
       {/* Stock Status */}
-      <div className="mt-6 flex items-center gap-2">
+      <div className="mt-6">
         <span
-          className={`size-2 rounded-full ${
-            isInStock ? "bg-[#16A34A]" : "bg-[#EF4444]"
-          }`}
-        />
-
-        <span
-          className={`text-sm font-medium ${
-            isInStock ? "text-[#16A34A]" : "text-[#EF4444]"
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium ${
+            isInStock
+              ? "bg-[#F0FDF4] text-[#008236]"
+              : "bg-red-50 text-red-600"
           }`}
         >
+          <span
+            className={`size-2 rounded-full ${
+              isInStock ? "bg-[#00C950]" : "bg-red-500"
+            }`}
+          />
           {isInStock ? "In Stock" : "Out of Stock"}
         </span>
       </div>
 
-      {/* Quantity */}
-      <div className="mt-8 border-t border-[#E5E7EB] pt-6">
-        <label className="text-sm font-semibold text-[#364153]">
-          Quantity
-        </label>
+      {/* Description and Quantity */}
+      <div className="mt-6 border-t border-[#F3F4F6] pt-5">
+        <p className="text-base leading-[26px] text-[#4A5565]">
+          {product.description}
+        </p>
 
-        <div className="mt-3 flex flex-wrap items-center gap-4">
-          <div className="flex h-[52px] items-center rounded-lg border border-[#E5E7EB]">
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon-lg"
-              aria-label="Decrease quantity"
-              disabled={!isInStock || quantity <= 1}
-              onClick={() => updateQuantity(quantity - 1)}
-              className="h-12 w-[52px] rounded-none"
-            >
-              <Minus className="size-5" />
-            </Button>
+        <div className="mt-6">
+          <label className="text-sm font-medium text-[#364153]">
+            Quantity
+          </label>
 
-            <span className="min-w-16 text-center font-medium text-[#1E2939]">
-              {quantity}
+          <div className="mt-2 flex flex-wrap items-center gap-4">
+            <div className="flex h-12 items-center overflow-hidden rounded-lg border-2 border-[#E5E7EB]">
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                aria-label="Decrease quantity"
+                disabled={!isInStock || quantity <= 1}
+                onClick={() => updateQuantity(quantity - 1)}
+                className="h-full w-11 rounded-none"
+              >
+                <Minus className="size-4" />
+              </Button>
+
+              <span className="min-w-16 text-center text-lg font-medium text-[#364153]">
+                {quantity}
+              </span>
+
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                aria-label="Increase quantity"
+                disabled={!isInStock || quantity >= product.quantity}
+                onClick={() => updateQuantity(quantity + 1)}
+                className="h-full w-11 rounded-none"
+              >
+                <Plus className="size-4" />
+              </Button>
+            </div>
+
+            <span className="text-sm text-[#6A7282]">
+              {product.quantity} available
             </span>
-
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon-lg"
-              aria-label="Increase quantity"
-              disabled={!isInStock || quantity >= product.quantity}
-              onClick={() => updateQuantity(quantity + 1)}
-              className="h-12 w-[52px] rounded-none"
-            >
-              <Plus className="size-5" />
-            </Button>
           </div>
-
-          <span className="text-sm text-[#6A7282]">
-            {product.quantity} available
-          </span>
         </div>
       </div>
 
       {/* Total Price */}
-      <div className="mt-6 flex items-center justify-between rounded-lg bg-[#F9FAFB] p-4">
+      <div className="mt-5 flex items-center justify-between rounded-lg bg-[#F9FAFB] p-3">
         <span className="text-sm font-medium text-[#6A7282]">
           Total Price:
         </span>
 
-        <span className="text-2xl font-bold text-[#1E2939]">
+        <span className="text-xl font-bold text-[#16A34A]">
           {totalPrice.toFixed(2)} EGP
         </span>
       </div>
 
       {/* Purchase Actions */}
-      <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <Button
           type="button"
           disabled={!isInStock}
-          className="h-[52px] bg-[#16A34A] text-base font-semibold text-white hover:bg-[#15803D]"
+          className="h-12 bg-[#16A34A] text-sm font-semibold text-white hover:bg-[#15803D]"
         >
-          <ShoppingCart className="size-5" />
+          <ShoppingCart className="size-4" />
           Add to Cart
         </Button>
 
         <Button
           type="button"
-          variant="outline"
           disabled={!isInStock}
-          className="h-[52px] border-[#16A34A] text-base font-semibold text-[#16A34A] hover:bg-[#ECFDF5]"
+          className="h-12 bg-[#101828] text-sm font-semibold text-white hover:bg-[#1E2939]"
         >
-          <Zap className="size-5" />
+          <Zap className="size-4" />
           Buy Now
         </Button>
       </div>
 
-      {/* Wishlist */}
-      <Button
-        type="button"
-        variant="outline"
-        className="mt-4 h-[52px] w-full border-[#E5E7EB] text-[#364153]"
-      >
-        <Heart className="size-5" />
-        Add to Wishlist
-      </Button>
+      {/* Wishlist and Share */}
+      <div className="mt-4 flex gap-3">
+        <Button
+          type="button"
+          variant="outline"
+          className="h-12 flex-1 border-[#E5E7EB] text-[#364153]"
+        >
+          <Heart className="size-4" />
+          Add to Wishlist
+        </Button>
+
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          aria-label="Share product"
+          className="size-12 shrink-0 border-[#E5E7EB] text-[#364153]"
+        >
+          <Share2 className="size-4" />
+        </Button>
+      </div>
+
+      {/* Benefits */}
+      <div className="mt-auto grid grid-cols-1 gap-4 border-t border-[#F3F4F6] pt-5 sm:grid-cols-3">
+        {benefits.map(({ icon: Icon, title, description }) => (
+          <div key={title} className="flex items-center gap-3">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-[#DCFCE7] text-[#16A34A]">
+              <Icon className="size-5" />
+            </span>
+
+            <div className="min-w-0">
+              <p className="text-xs font-medium text-[#364153]">
+                {title}
+              </p>
+              <p className="text-[10px] text-[#6A7282]">
+                {description}
+              </p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

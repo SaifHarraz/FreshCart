@@ -10,11 +10,12 @@ export interface ProductInfoProps {
   product: Pick<
     Product,
     | "title"
+    | "description"
     | "price"
     | "priceAfterDiscount"
     | "quantity"
     | "ratingsAverage"
-    | "ratingsQuantity"
+    | "ratingsQuantity" 
     | "category"
     | "brand"
   >;
