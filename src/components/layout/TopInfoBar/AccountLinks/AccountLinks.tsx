@@ -1,0 +1,61 @@
+import Link from "next/link";
+import {
+  LogOut,
+  UserRound,
+  UserPlus,
+} from "lucide-react";
+
+import type { HeaderUser } from "../../types";
+type AccountLinksProps = {
+  user?: HeaderUser | null;
+  onSignOut?: () => void;
+};
+
+export function AccountLinks({
+  user,
+  onSignOut,
+}: AccountLinksProps) {
+  return (
+    <div className="flex items-center gap-4">
+      {user ? (
+        <>
+          <Link
+            href="/profile"
+            className="flex items-center gap-1.5 text-white/80 transition-colors hover:text-primary"
+          >
+            <UserRound className="size-3.5" />
+            <span>{user.name}</span>
+          </Link>
+
+          <button
+            type="button"
+            onClick={onSignOut}
+            disabled={!onSignOut}
+            className="flex items-center gap-1.5 text-white/80 transition-colors hover:text-red-500 disabled:cursor-not-allowed"
+          >
+            <LogOut className="size-3.5" />
+            <span>Sign Out</span>
+          </button>
+        </>
+      ) : (
+        <>
+          <Link
+            href="/login"
+            className="flex items-center gap-1.5 text-white/80 transition-colors hover:text-primary"
+          >
+            <UserRound className="size-3.5" />
+            <span>Sign In</span>
+          </Link>
+
+          <Link
+            href="/signup"
+            className="flex items-center gap-1.5 text-white/80 transition-colors hover:text-primary"
+          >
+            <UserPlus className="size-3.5" />
+            <span>Sign Up</span>
+          </Link>
+        </>
+      )}
+    </div>
+  );
+}

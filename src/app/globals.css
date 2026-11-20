@@ -1,0 +1,227 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  /* Typography */
+  --font-sans: var(--font-exo), var(--font-arabic), sans-serif;
+  --font-heading: var(--font-exo), var(--font-arabic), sans-serif;
+  --font-mono: var(--font-geist-mono);
+
+  /* Main colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+
+  /* Brand colors */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  /* Supporting colors */
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  /* States */
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Charts */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Existing shadcn radius system */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+:root {
+  color-scheme: light;
+
+  /* Base */
+  --background: #FFFFFF;
+  --foreground: #0F172A;
+
+  --card: #FFFFFF;
+  --card-foreground: #0F172A;
+
+  --popover: #FFFFFF;
+  --popover-foreground: #0F172A;
+
+  /* Primary — FreshCart green */
+  --primary: #22C55E;
+  --primary-foreground: #FFFFFF;
+
+  /* Secondary */
+  --secondary: #F0FDF4;
+  --secondary-foreground: #15803D;
+
+  /* Muted */
+  --muted: #F3F4F6;
+  --muted-foreground: #4B5563;
+
+  /* Accent */
+  --accent: #F0FDF4;
+  --accent-foreground: #15803D;
+
+  /* Semantic */
+  --destructive: #EF4444;
+
+  /* Borders and focus */
+  --border: #E5E7EB;
+  --input: #E5E7EB;
+  --ring: #22C55E;
+
+  /* Charts */
+  --chart-1: #22C55E;
+  --chart-2: #3B82F6;
+  --chart-3: #F59E0B;
+  --chart-4: #15803D;
+  --chart-5: #9CA3AF;
+
+  /* Sidebar */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #0F172A;
+  --sidebar-primary: #16A34A;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F0FDF4;
+  --sidebar-accent-foreground: #15803D;
+  --sidebar-border: #E5E7EB;
+  --sidebar-ring: #22C55E;
+
+  /*
+   * Temporary existing shadcn default.
+   * Not yet confirmed as a Figma design token.
+   */
+  --radius: 0.625rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom page scrollbar */
+html {
+  scrollbar-width: auto;
+  scrollbar-color: #bdbdbd #292929;
+}
+
+/* Chrome, Edge, Safari */
+html::-webkit-scrollbar {
+  width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+  background: #292929;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border: 2px solid #292929;
+  border-radius: 10px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: #d0d0d0;
+}
+
+/* Scrollbar arrow buttons */
+html::-webkit-scrollbar-button {
+  display: block;
+  height: 16px;
+  background-color: #292929;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+html::-webkit-scrollbar-button:vertical:decrement {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23bdbdbd' d='M5 2 9 8H1z'/%3E%3C/svg%3E");
+}
+
+html::-webkit-scrollbar-button:vertical:increment {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%23bdbdbd' d='M1 2h8L5 8z'/%3E%3C/svg%3E");
+}
+/* Pagination container */
+.home-slider .swiper-pagination {
+  position: absolute;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 8px !important;
+  width: 100% !important;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  z-index: 20;
+}
+
+.home-slider .home-slider-bullet {
+  flex: 0 0 auto;
+  width: 12px;
+  height: 12px;
+  margin: 0 !important;
+
+  border-radius: 9999px;
+  background: white;
+  opacity: 0.5;
+  cursor: pointer;
+
+  transition: width 300ms ease, opacity 300ms ease;
+}
+
+.home-slider .home-slider-bullet-active {
+  width: 32px;
+  opacity: 1;
+}
+@layer utilities {
+  .category-card-shadow {
+    box-shadow:
+      0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+      0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 200ms ease-out;
+  }
+
+  .category-card-shadow:hover {
+    box-shadow:
+      0px 4px 8px 0px rgba(0, 0, 0, 0.1),
+      0px 2px 4px -1px rgba(0, 0, 0, 0.08);
+  }
+}
