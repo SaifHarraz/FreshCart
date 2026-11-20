@@ -1,11 +1,14 @@
-
 import { notFound } from "next/navigation";
 
 import ProductGallery from "@/features/products/components/ProductGallery/ProductGallery";
 import ProductInfo from "@/features/products/components/ProductInfo/ProductInfo";
 import ProductBreadcrumb from "@/features/products/components/ProductBreadcrumb/ProductBreadcrumb";
+import ProductTabs from "@/features/products/components/ProductTabs/ProductTabs";
 
-import { getProductById } from "@/features/products/services/products.service";
+import {
+  getProductById,
+  getProductReviews,
+} from "@/features/products/services/products.service";
 
 export type ProductPageProps = {
   params: Promise<{
@@ -13,9 +16,7 @@ export type ProductPageProps = {
   }>;
 };
 
-export default async function ProductContent({
-  params,
-}: ProductPageProps) {
+export default async function ProductContent({ params }: ProductPageProps) {
   // 1. Resolve the dynamic route parameter
   const { id } = await params;
 
@@ -26,7 +27,7 @@ export default async function ProductContent({
   if (!product) {
     notFound();
   }
-
+  const reviewsResponse = await getProductReviews(id);
   // 4. Render the product
   return (
     <>
@@ -38,6 +39,11 @@ export default async function ProductContent({
         <ProductGallery product={product} />
         <ProductInfo product={product} />
       </div>
+      <ProductTabs
+        product={product}
+        reviews={reviewsResponse.data}
+        reviewsCount={reviewsResponse.results}
+      />
     </>
   );
 }

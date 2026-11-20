@@ -2,6 +2,7 @@ import type {
   ProductResponse,
   ProductsResponse,
 } from "../types/product.types";
+import type { ProductReviewsResponse } from "../types/product-reviews.types";
 
 const PRODUCTS_API_URL =
   "https://ecommerce.routemisr.com/api/v1/products";
@@ -42,4 +43,21 @@ export async function getProductById(id: string) {
 
   return result.data;
 }
+export async function getProductReviews(productId: string) {
+  const response = await fetch(
+    `${PRODUCTS_API_URL}/${productId}/reviews`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 
+  if (!response.ok) {
+    throw new Error("Failed to fetch product reviews");
+  }
+
+  const result: ProductReviewsResponse = await response.json();
+
+  return result;
+}
