@@ -1,6 +1,4 @@
-
 import { notFound } from "next/navigation";
-
 import ProductGallery from "@/features/products/components/ProductGallery/ProductGallery";
 import ProductInfo from "@/features/products/components/ProductInfo/ProductInfo";
 import { getProductById } from "@/features/products/services/products.service";

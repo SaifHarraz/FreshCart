@@ -9,7 +9,7 @@ const PRODUCTS_API_URL =
 export async function getProducts() {
   const response = await fetch(PRODUCTS_API_URL, {
     next: {
-      revalidate: 3600,
+      revalidate: 60,
     },
   });
 
@@ -26,7 +26,7 @@ export async function getProducts() {
 export async function getProductById(id: string) {
   const response = await fetch(`${PRODUCTS_API_URL}/${id}`, {
     next: {
-      revalidate: 3600,
+      revalidate: 60,
     },
   });
 
