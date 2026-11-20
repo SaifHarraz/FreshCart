@@ -12,15 +12,17 @@ export default async function HomeCategories() {
   return (
     <section className="px-4 py-8">
       <div className="mx-auto max-w-[1536px]">
-        {/* Section Header */}
-         <HomeSectionHeader
-  title={
-    <>
-      Shop By <span className="text-[#009966]">Category</span>
-    </>
-  }
-  action={{ label: "View All Categories", href: "/categories" }}
-/>
+       {/* Section Header */}
+<div className="py-8">
+  <HomeSectionHeader
+    title={
+      <>
+        Shop By <span className="text-[#009966]">Category</span>
+      </>
+    }
+    action={{ label: "View All Categories", href: "/categories" }}
+  />
+</div>
 
         {/* Categories Grid */}
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
