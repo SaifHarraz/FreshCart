@@ -11,6 +11,7 @@ export default function ProductPage({
       <Suspense fallback={<ProductDetailsSkeleton />}>
         <ProductContent params={params} />
       </Suspense>
+      
     </main>
   );
 }

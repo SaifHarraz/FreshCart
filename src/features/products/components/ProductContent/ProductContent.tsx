@@ -9,6 +9,7 @@ import {
   getProductById,
   getProductReviews,
 } from "@/features/products/services/products.service";
+import YouMayAlsoLike from "../YouMayAlsoLike/YouMayAlsoLike";
 
 export type ProductPageProps = {
   params: Promise<{
@@ -40,6 +41,12 @@ export default async function ProductContent({ params }: ProductPageProps) {
         <ProductInfo product={product} />
       </div>
       <ProductTabs product={product} reviewsResponse={reviewsResponse} />
+      <ProductTabs
+  product={product}
+  reviewsResponse={reviewsResponse}
+/>
+
+<YouMayAlsoLike products={selectRelatedProducts} />
     </>
   );
 }
