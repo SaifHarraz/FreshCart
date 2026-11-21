@@ -22,7 +22,7 @@ export default function YouMayAlsoLike({
       {/* Section Header */}
       <div className="mb-5 flex items-center justify-between">
         <div className="flex items-center gap-2">
-         <span class="h-6 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-[#00BC7D] to-[#007A55]"></span>
+         <span className="h-6 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-[#00BC7D] to-[#007A55]"></span>
 
           <h2 className="text-lg leading-7 font-bold text-[#101828]">
             You May Also{" "}
