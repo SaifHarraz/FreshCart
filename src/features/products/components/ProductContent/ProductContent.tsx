@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation";
-
 import ProductGallery from "@/features/products/components/ProductGallery/ProductGallery";
 import ProductInfo from "@/features/products/components/ProductInfo/ProductInfo";
 import ProductBreadcrumb from "@/features/products/components/ProductBreadcrumb/ProductBreadcrumb";
 import ProductTabs from "@/features/products/components/ProductTabs/ProductTabs";
-
+import YouMayAlsoLike from "../YouMayAlsoLike/YouMayAlsoLike";
 import {
   getProductById,
   getProductReviews,
+  getProducts,
 } from "@/features/products/services/products.service";
-import YouMayAlsoLike from "../YouMayAlsoLike/YouMayAlsoLike";
 
+import { selectRelatedProducts } from "@/features/products/utils/related-products.utils";
 export type ProductPageProps = {
   params: Promise<{
     id: string;
@@ -18,18 +18,25 @@ export type ProductPageProps = {
 };
 
 export default async function ProductContent({ params }: ProductPageProps) {
-  // 1. Resolve the dynamic route parameter
-  const { id } = await params;
+ const { id } = await params;
 
-  // 2. Fetch the requested product
-  const product = await getProductById(id);
+const product = await getProductById(id);
 
-  // 3. Handle invalid product IDs
-  if (!product) {
-    notFound();
-  }
-  const reviewsResponse = await getProductReviews(id);
-  // 4. Render the product
+if (!product) {
+  notFound();
+}
+
+const [reviewsResponse, categoryProductsResponse] = await Promise.all([
+  getProductReviews(id),
+  getProducts({
+    category: product.category._id,
+  }),
+]);
+
+const relatedProducts = selectRelatedProducts(
+  product,
+  categoryProductsResponse.data
+);
   return (
     <>
       <div className="mb-4">
@@ -41,12 +48,7 @@ export default async function ProductContent({ params }: ProductPageProps) {
         <ProductInfo product={product} />
       </div>
       <ProductTabs product={product} reviewsResponse={reviewsResponse} />
-      <ProductTabs
-  product={product}
-  reviewsResponse={reviewsResponse}
-/>
-
-<YouMayAlsoLike products={selectRelatedProducts} />
+      <YouMayAlsoLike products={relatedProducts} />
     </>
   );
 }

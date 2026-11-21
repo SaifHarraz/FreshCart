@@ -16,16 +16,7 @@ export default function YouMayAlsoLike({
   products,
 }: YouMayAlsoLikeProps) {
   const [swiper, setSwiper] = useState<SwiperInstance | null>(null);
-  const [canGoPrev, setCanGoPrev] = useState(false);
-  const [canGoNext, setCanGoNext] = useState(false);
-
-  function updateNavigation(instance: SwiperInstance) {
-    setCanGoPrev(!instance.isBeginning);
-    setCanGoNext(!instance.isEnd);
-  }
-
   if (products.length === 0) return null;
-
   return (
     <section className="mt-12 w-full">
       {/* Section Header */}
@@ -44,9 +35,9 @@ export default function YouMayAlsoLike({
           <button
             type="button"
             aria-label="Previous products"
-            disabled={!canGoPrev}
+           
             onClick={() => swiper?.slidePrev()}
-            className="flex size-10 items-center justify-center rounded-full bg-[#F3F4F6] text-[#4A5565] transition-colors hover:bg-[#DCFCE7] hover:text-[#16A34A] disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex cursor-pointer size-10 items-center justify-center rounded-full bg-[#F3F4F6] text-[#4A5565] transition-colors hover:bg-[#DCFCE7] hover:text-[#16A34A] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronLeft className="size-5" />
           </button>
@@ -54,9 +45,9 @@ export default function YouMayAlsoLike({
           <button
             type="button"
             aria-label="Next products"
-            disabled={!canGoNext}
+           
             onClick={() => swiper?.slideNext()}
-            className="flex size-10 items-center justify-center rounded-full bg-[#F3F4F6] text-[#4A5565] transition-colors hover:bg-[#DCFCE7] hover:text-[#16A34A] disabled:cursor-not-allowed disabled:opacity-40"
+            className="flex cursor-pointer size-10 items-center justify-center rounded-full bg-[#F3F4F6] text-[#4A5565] transition-colors hover:bg-[#DCFCE7] hover:text-[#16A34A] disabled:cursor-not-allowed disabled:opacity-40"
           >
             <ChevronRight className="size-5" />
           </button>
@@ -65,11 +56,10 @@ export default function YouMayAlsoLike({
 
       {/* Products Slider */}
       <Swiper
+        loop
         onSwiper={(instance) => {
           setSwiper(instance);
-          updateNavigation(instance);
         }}
-        onSlideChange={updateNavigation}
         slidesPerView={1}
         spaceBetween={16}
         watchOverflow

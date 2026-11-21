@@ -7,8 +7,26 @@ import type { ProductReviewsResponse } from "../types/product-reviews.types";
 const PRODUCTS_API_URL =
   "https://ecommerce.routemisr.com/api/v1/products";
 
-export async function getProducts() {
-  const response = await fetch(PRODUCTS_API_URL, {
+export async function getProducts(params?: {
+  category?: string;
+  page?: number;
+  limit?: number;
+}) {
+  const searchParams = new URLSearchParams();
+
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined) {
+        searchParams.set(key, String(value));
+      }
+    });
+  }
+
+  const url = searchParams.size
+    ? `${PRODUCTS_API_URL}?${searchParams.toString()}`
+    : PRODUCTS_API_URL;
+
+  const response = await fetch(url, {
     next: {
       revalidate: 60,
     },
