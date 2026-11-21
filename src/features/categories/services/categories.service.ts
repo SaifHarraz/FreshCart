@@ -10,7 +10,7 @@ interface CategoriesResponse {
 export async function getCategories(): Promise<Category[]> {
   const response = await fetch(CATEGORIES_API_URL, {
     next: {
-      revalidate: 3600,
+      revalidate: 60,
     },
   });
 

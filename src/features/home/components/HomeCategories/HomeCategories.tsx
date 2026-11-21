@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { ChevronRight } from "lucide-react";
 import { getCategories } from "@/features/categories/services/categories.service";
+import HomeSectionHeader from "../HomeSectionHeader/HomeSectionHeader";
 
 export default async function HomeCategories() {
   const categories = await getCategories();
@@ -11,23 +12,16 @@ export default async function HomeCategories() {
   return (
     <section className="px-4 py-8">
       <div className="mx-auto max-w-[1536px]">
-        {/* Section Header */}
-        <div className="flex w-full items-center justify-between">
-  <div className="flex items-center gap-3 py-8">
-    <span className="h-8 w-1.5 shrink-0 rounded-full bg-gradient-to-b from-[#00BC7D] to-[#007A55]" />
-
-    <h2 className="text-[30px] leading-9 font-bold text-[#1E2939]">
-      Shop By <span className="text-[#009966]">Category</span>
-    </h2>
-  </div>
-
-  <Link
-    href="/categories"
-    className="inline-flex items-center text-base font-medium text-[#16A34A]"
-  >
-    View All Categories
-    <ChevronRight className="ml-2 size-5" />
-  </Link>
+       {/* Section Header */}
+<div className="py-8">
+  <HomeSectionHeader
+    title={
+      <>
+        Shop By <span className="text-[#009966]">Category</span>
+      </>
+    }
+    action={{ label: "View All Categories", href: "/categories" }}
+  />
 </div>
 
         {/* Categories Grid */}

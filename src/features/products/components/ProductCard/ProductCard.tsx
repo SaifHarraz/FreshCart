@@ -95,7 +95,7 @@ const partialStar = rating - fullStars;
         )}
 
         {/* Title */}
-        <h3 className="mt-1 line-clamp-2 text-base leading-6 font-medium text-[#364153]">
+        <h3 title={product.title}  className="mt-1 line-clamp-2 text-base leading-6 font-medium text-[#364153]">
           {product.title}
         </h3>
 

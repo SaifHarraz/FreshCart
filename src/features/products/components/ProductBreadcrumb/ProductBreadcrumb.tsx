@@ -32,7 +32,7 @@ export default function ProductBreadcrumb({
           <span
             className={
               index === items.length - 2
-                ? "font-medium text-[#364153]"
+                ? "font-medium truncate text-[#364153]"
                 : ""
             }
           >

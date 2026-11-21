@@ -2,14 +2,33 @@ import type {
   ProductResponse,
   ProductsResponse,
 } from "../types/product.types";
+import type { ProductReviewsResponse } from "../types/product-reviews.types";
 
 const PRODUCTS_API_URL =
   "https://ecommerce.routemisr.com/api/v1/products";
 
-export async function getProducts() {
-  const response = await fetch(PRODUCTS_API_URL, {
+export async function getProducts(params?: {
+  category?: string;
+  page?: number;
+  limit?: number;
+}) {
+  const searchParams = new URLSearchParams();
+
+  if (params) {
+    Object.entries(params).forEach(([key, value]) => {
+      if (value !== undefined) {
+        searchParams.set(key, String(value));
+      }
+    });
+  }
+
+  const url = searchParams.size
+    ? `${PRODUCTS_API_URL}?${searchParams.toString()}`
+    : PRODUCTS_API_URL;
+
+  const response = await fetch(url, {
     next: {
-      revalidate: 3600,
+      revalidate: 60,
     },
   });
 
@@ -26,7 +45,7 @@ export async function getProducts() {
 export async function getProductById(id: string) {
   const response = await fetch(`${PRODUCTS_API_URL}/${id}`, {
     next: {
-      revalidate: 3600,
+      revalidate: 60,
     },
   });
 
@@ -41,5 +60,31 @@ export async function getProductById(id: string) {
   const result: ProductResponse = await response.json();
 
   return result.data;
+}
+
+export async function getProductReviews(
+  productId: string,
+  
+) {
+  const params = new URLSearchParams({
+    sort: "-createdAt,-rating",
+  });
+
+  const response = await fetch(
+    `${PRODUCTS_API_URL}/${productId}/reviews?${params.toString()}`,
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch product reviews");
+  }
+
+  const result: ProductReviewsResponse = await response.json();
+
+  return result;
 }
 

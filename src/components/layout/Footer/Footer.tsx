@@ -15,7 +15,6 @@ import {
   FaYoutube,
 } from "react-icons/fa6";
 import FooterLinkColumn from "./FooterLinkColumn/FooterLinkColumn";
-
 import {
   shopLinks,
   guestAccountLinks,
@@ -28,6 +27,7 @@ import {
 
 import type { FooterProps } from "./types";
 import BrandLogo from "../BrandLogo/BrandLogo";
+import CurrentYear from "./CurrentYear/CurrentYear";
 
 const socialIcons = {
   facebook: FaFacebookF,
@@ -35,7 +35,6 @@ const socialIcons = {
   instagram: FaInstagram,
   youtube: FaYoutube,
 };
-
 export default function Footer({
   user,
   logoSrc,
@@ -133,9 +132,9 @@ export default function Footer({
         <div className="mx-auto flex max-w-[1504px] flex-col items-center justify-between gap-4 px-4 py-6 text-xs text-[#667085] sm:flex-row">
 
           {/* Copyright */}
-          <p>
-            © {new Date().getFullYear()} FreshCart. All rights reserved.
-          </p>
+         <p>
+  © <CurrentYear /> FreshCart. All rights reserved.
+</p>
 
           {/* Payment Methods */}
           <div className="flex flex-wrap items-center justify-center gap-4">
