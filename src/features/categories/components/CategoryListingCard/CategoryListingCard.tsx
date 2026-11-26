@@ -14,7 +14,7 @@ export default function CategoryListingCard({
 }: CategoryListingCardProps) {
   return (
     <Link
-      href={`/categories/${category._id}`}
+      href={`/categories/${category._id}/subcategories`}
       className="group flex min-h-[235px] flex-col rounded-2xl border border-[#F3F4F6] bg-white p-[17px] transition-colors duration-300 hover:border-[#16A34A] md:min-h-[267px] md:p-6 xl:min-h-[346px]"
     >
      <div className="relative aspect-square w-full overflow-hidden rounded-xl">
