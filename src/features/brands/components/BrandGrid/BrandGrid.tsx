@@ -1,9 +1,5 @@
 import BrandCard from "../BrandCard/BrandCard";
-import type { Brand } from "../../types/brand.types";
-
-interface BrandGridProps {
-  brands: Brand[];
-}
+import type { BrandGridProps } from "../../types/brand.types";
 
 export default function BrandGrid({ brands }: BrandGridProps) {
   if (!brands.length) {

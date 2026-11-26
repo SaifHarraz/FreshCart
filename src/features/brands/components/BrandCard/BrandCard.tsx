@@ -1,11 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-
-interface BrandCardProps {
-  name: string;
-  logo: string;
-  slug: string;
-}
+import type { BrandCardProps } from "../../types/brand.types";
 
 export default function BrandCard({
   name,
