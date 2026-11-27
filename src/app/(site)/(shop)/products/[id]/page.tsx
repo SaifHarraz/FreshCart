@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import ProductDetailsSkeleton from "@/features/products/components/ProductDetailsSkeleton/ProductDetailsSkeleton";
-import ProductContent, { ProductPageProps } from "@/features/products/components/ProductContent/ProductContent";
+import ProductContent, { ProductPageProps } from "@/features/products/components/ProductDetailsContent/ProductDetailsContent";
 
 export default function ProductPage({
   params,
