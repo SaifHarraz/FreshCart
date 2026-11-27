@@ -3,23 +3,27 @@ import type {
   ProductsResponse,
 } from "../types/product.types";
 import type { ProductReviewsResponse } from "../types/product-reviews.types";
-
+import type { GetProductsParams } from "../types/product-query.types";
 const PRODUCTS_API_URL =
   "https://ecommerce.routemisr.com/api/v1/products";
 
-export async function getProducts(params?: {
-  category?: string;
-  page?: number;
-  limit?: number;
-}) {
+
+export async function getProducts(params?: GetProductsParams) {
   const searchParams = new URLSearchParams();
 
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined) {
-        searchParams.set(key, String(value));
-      }
-    });
+  if (params?.keyword) searchParams.set("keyword", params.keyword);
+  if (params?.page) searchParams.set("page", String(params.page));
+  if (params?.limit) searchParams.set("limit", String(params.limit));
+  if (params?.sort) searchParams.set("sort", params.sort);
+  if (params?.brand) searchParams.set("brand", params.brand);
+  if (params?.category) searchParams.set("category[in]", params.category);
+
+  if (params?.minPrice !== undefined) {
+    searchParams.set("price[gte]", String(params.minPrice));
+  }
+
+  if (params?.maxPrice !== undefined) {
+    searchParams.set("price[lte]", String(params.maxPrice));
   }
 
   const url = searchParams.size
@@ -40,6 +44,7 @@ export async function getProducts(params?: {
 
   return result;
 }
+
 
 
 export async function getProductById(id: string) {
