@@ -1,34 +1,51 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import type { BrandCardProps } from "../../types/brand.types";
 
-export default function BrandCard({
-  name,
-  logo,
-  slug,
-}: BrandCardProps) {
+export default function BrandCard({ name, logo }: BrandCardProps) {
   return (
-    <article className="group flex h-[225px] flex-col items-center justify-center rounded-xl border border-gray-200 bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-md md:h-[288px]">
-      <div className="relative mb-5 flex size-28 items-center justify-center rounded-lg bg-gray-50 p-4 md:size-36">
+    <Link
+      href="/products"
+      aria-label={`View products from ${name}`}
+      className="
+        group flex h-[225px] flex-col items-center
+        rounded-2xl border border-[#f3f4f6] bg-white p-4
+        shadow-[0_1px_3px_0_rgba(0,0,0,0.1),0_1px_2px_-1px_rgba(0,0,0,0.1)]
+        transition-shadow duration-200
+        hover:shadow-[0_4px_8px_0_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.08)]
+        focus-visible:outline-2 focus-visible:outline-offset-2
+        focus-visible:outline-[#7f22fe]
+        md:h-[202.67px] md:p-5
+        xl:h-[288px]
+      "
+    >
+      <div className="relative size-[137px] shrink-0 overflow-hidden rounded-xl bg-[#f9fafb] p-4 md:size-[106.67px] xl:size-[192px]">
         <Image
           src={logo}
           alt={`${name} logo`}
           fill
-          sizes="(max-width: 768px) 112px, 144px"
+          sizes="(max-width: 767px) 137px, (max-width: 1279px) 107px, 192px"
           className="object-contain p-4"
         />
       </div>
 
-      <h2 className="text-center text-base font-semibold text-gray-900">
+      <h2 className="mt-3 w-full truncate text-center text-sm leading-5 font-semibold text-[#101828]">
         {name}
       </h2>
 
-      <Link
-        href={`/brands/${slug}`}
-        className="mt-3 text-sm font-medium text-purple-600 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100"
+      <span
+        className="
+          mt-1.5 flex items-center justify-center gap-1
+          text-xs leading-4 font-medium text-[#7f22fe]
+          opacity-0 transition-opacity duration-200
+          group-hover:opacity-100
+          group-focus-visible:opacity-100
+        "
       >
         View Products
-      </Link>
-    </article>
+        <ArrowRight className="size-3" />
+      </span>
+    </Link>
   );
 }

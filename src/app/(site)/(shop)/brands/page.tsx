@@ -9,9 +9,11 @@ export default async function Page() {
     <>
       <BrandPageHeader />
 
-      <main className="mx-auto w-full max-w-[1536px] px-4 py-8">
-        <BrandGrid brands={brands} />
-      </main>
+      <section className="min-h-[1200px] bg-[#f9fafb]/50 py-6 md:py-10">
+        <div className="mx-auto w-full max-w-[1536px] px-4">
+          <BrandGrid brands={brands} />
+        </div>
+      </section>
     </>
   );
 }

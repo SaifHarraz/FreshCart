@@ -1,4 +1,3 @@
-
 import type { ListingResponse } from "@/types/listing";
 
 export interface Brand {
@@ -15,7 +14,6 @@ export type BrandsResponse = ListingResponse<Brand>;
 export interface BrandCardProps {
   name: string;
   logo: string;
-  slug: string;
 }
 
 export interface BrandGridProps {
