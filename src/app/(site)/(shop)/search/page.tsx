@@ -3,13 +3,11 @@ import SearchPageHeader from "@/features/search/components/SearchPageHeader/Sear
 import SearchResultsToolbar from "@/features/search/components/SearchToolbar/SearchToolbar";
 import ProductGrid from "@/features/products/components/ProductGrid/ProductGrid";
 import { getProducts } from "@/features/products/services/products.service";
-import { Search } from 'lucide-react';
+import { parseSearchParams } from "@/features/search/utils/parse-search-params";
+import type { SearchPageSearchParams } from "@/features/search/types/search-page.types";
 
 interface SearchPageProps {
-  searchParams: Promise<{
-    keyword?: string;
-    sort?: string;
-  }>;
+  searchParams: Promise<SearchPageSearchParams>;
 }
 
 export default async function SearchPage({
@@ -20,10 +18,9 @@ export default async function SearchPage({
   const keyword = params.keyword?.trim() ?? "";
   const sort = params.sort ?? "";
 
-  const { data: products, results: total } = await getProducts({
-    ...(keyword && { keyword }),
-    ...(sort && { sort }),
-  });
+  const { data: products, results: total } = await getProducts(
+    parseSearchParams(params)
+  );
 
   return (
     <>
@@ -46,7 +43,7 @@ export default async function SearchPage({
               </h2>
 
               <p className="mt-2 text-sm text-[#6A7282]">
-                Try searching with a different keyword.
+                Try adjusting your search or filters.
               </p>
             </div>
           )}

@@ -7,3 +7,14 @@ export interface SearchResultsToolbarProps {
   total: number;
   sort: string;
 }
+export interface SearchPageSearchParams {
+  keyword?: string;
+  sort?: string;
+  brand?: string;
+  category?: string;
+  categoryIn?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  page?: string;
+  limit?: string;
+}
