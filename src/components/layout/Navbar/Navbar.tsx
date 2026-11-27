@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -33,7 +33,18 @@ export default function Navbar({
 }: NavbarProps) {
   const pathname = usePathname();
   const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
+const router = useRouter();
 
+function handleSearch(query: string) {
+  if (!query) return;
+
+  if (onSearch) {
+    onSearch(query);
+    return;
+  }
+
+  router.push(`/search?keyword=${encodeURIComponent(query)}`);
+}
   function closeMobileMenu() {
     setIsMobileSheetOpen(false);
   }
@@ -46,7 +57,7 @@ export default function Navbar({
           <BrandLogo variant="navbar" />
 
           {/* Desktop search */}
-          {pathname !== "/search" && <SearchBar onSearch={onSearch} />}
+          {pathname !== "/search" && <SearchBar onSearch={handleSearch} />}
 
           {/* Desktop navigation */}
           <NavigationLinks items={navItems} />
@@ -119,7 +130,7 @@ export default function Navbar({
             navItems={navItems}
             supportHref={supportHref}
             onLogout={onLogout}
-            onSearch={onSearch}
+            onSearch={handleSearch}
           />
         )}
       </div>

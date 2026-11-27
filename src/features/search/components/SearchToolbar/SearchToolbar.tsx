@@ -1,101 +1,64 @@
-import {
-  Grid2X2,
-  List,
-  SlidersHorizontal,
-} from "lucide-react";
+import { SearchResultsToolbarProps } from "../../types/search-page.types";
 
-type ViewMode = "grid" | "list";
-
-export type SortOption =
-  | "relevance"
-  | "price-asc"
-  | "price-desc"
-  | "newest"
-  | "top-rated";
-
-type SearchToolbarProps = {
-  viewMode: ViewMode;
-  onViewModeChange: (mode: ViewMode) => void;
-  onOpenFilters: () => void;
-  sort: SortOption;
-  onSortChange: (sort: SortOption) => void;
-};
-
-export default function SearchToolbar({
-  viewMode,
-  onViewModeChange,
-  onOpenFilters,
+export default function SearchResultsToolbar({
+  keyword,
+  total,
   sort,
-  onSortChange,
-}: SearchToolbarProps) {
+}: SearchResultsToolbarProps) {
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      {/* View and Filters */}
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-1 rounded-lg border border-[#E5E7EB] p-1">
-          <button
-            type="button"
-            aria-label="Grid view"
-            aria-pressed={viewMode === "grid"}
-            onClick={() => onViewModeChange("grid")}
-            className={`flex size-9 items-center justify-center rounded-md transition-colors ${
-              viewMode === "grid"
-                ? "bg-[#16A34A] text-white"
-                : "text-[#6A7282] hover:bg-[#F3F4F6]"
-            }`}
-          >
-            <Grid2X2 className="size-4" />
-          </button>
+    <div className="flex flex-col justify-between gap-4 border-b border-[#E5E7EB] pb-5 sm:flex-row sm:items-center">
+      <div>
+        <h2 className="text-base leading-6 font-semibold text-[#1E2939]">
+          {keyword
+            ? `Results for "${keyword}"`
+            : "All Products"}
+        </h2>
 
-          <button
-            type="button"
-            aria-label="List view"
-            aria-pressed={viewMode === "list"}
-            onClick={() => onViewModeChange("list")}
-            className={`flex size-9 items-center justify-center rounded-md transition-colors ${
-              viewMode === "list"
-                ? "bg-[#16A34A] text-white"
-                : "text-[#6A7282] hover:bg-[#F3F4F6]"
-            }`}
-          >
-            <List className="size-4" />
-          </button>
-        </div>
-
-        <button
-          type="button"
-          onClick={onOpenFilters}
-          className="inline-flex h-10 items-center justify-center gap-2 rounded-lg border border-[#D1D5DC] px-4 text-sm font-medium text-[#364153] transition-colors hover:border-[#16A34A] hover:text-[#16A34A]"
-        >
-          <SlidersHorizontal className="size-4" />
-          Filters
-        </button>
+        <p className="mt-1 text-sm leading-5 text-[#6A7282]">
+          Found {total} products
+        </p>
       </div>
 
-      {/* Sorting */}
-      <div className="flex items-center justify-between gap-3 sm:justify-end">
+      <form
+        action="/search"
+        method="GET"
+        className="flex items-center gap-3"
+      >
+        {keyword && (
+          <input
+            type="hidden"
+            name="keyword"
+            value={keyword}
+          />
+        )}
+
         <label
           htmlFor="search-sort"
-          className="text-sm text-[#6A7282]"
+          className="shrink-0 text-sm font-medium text-[#4A5565]"
         >
-          Sort by:
+          Sort by
         </label>
 
         <select
           id="search-sort"
-          value={sort}
-          onChange={(event) =>
-            onSortChange(event.target.value as SortOption)
-          }
-          className="h-10 min-w-40 rounded-lg border border-[#D1D5DC] bg-white px-3 text-sm text-[#364153] outline-none focus:border-[#16A34A]"
+          name="sort"
+          defaultValue={sort}
+          className="h-10 min-w-40 rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#1E2939] outline-none transition-colors focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/10"
         >
-          <option value="relevance">Relevance</option>
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
-          <option value="newest">Newest</option>
-          <option value="top-rated">Top Rated</option>
+          <option value="">Recommended</option>
+          <option value="price">Price: Low to High</option>
+          <option value="-price">Price: High to Low</option>
+          <option value="-ratingsAverage">Top Rated</option>
+          <option value="-createdAt">Newest</option>
         </select>
-      </div>
+
+        <button
+          type="submit"
+          className="h-10 rounded-lg bg-[#16A34A] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#15803D]"
+        >
+          Apply
+        </button>
+      </form>
     </div>
   );
 }

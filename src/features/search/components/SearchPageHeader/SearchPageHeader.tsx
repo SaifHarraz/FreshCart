@@ -1,47 +1,47 @@
+
 import Link from "next/link";
 import { Search } from "lucide-react";
+import { SearchPageHeaderProps } from "../../types/search-page.types";
 
-type SearchPageHeaderProps = {
-  query?: string;
-};
 
 export default function SearchPageHeader({
-  query = "",
+  keyword,
 }: SearchPageHeaderProps) {
   return (
     <section className="border-b border-[#E5E7EB] bg-white">
-      <div className="mx-auto w-full max-w-[1536px] px-4 py-6 md:py-8">
+      <div className="mx-auto w-full max-w-[1536px] px-4 py-8 md:py-10">
         <nav
           aria-label="Breadcrumb"
-          className="mb-5 flex items-center gap-2 text-sm text-[#6A7282]"
+          className="flex items-center gap-2 text-sm text-[#6A7282]"
         >
-          <Link href="/" className="transition-colors hover:text-[#16A34A]">
+          <Link href="/" className="hover:text-[#16A34A]">
             Home
           </Link>
 
           <span>/</span>
 
-          <span className="font-medium text-[#364153]">
-            Search Results
+          <span className="text-[#1E2939]">
+            Search
           </span>
         </nav>
 
-        <form
-          action="/search"
-          method="GET"
-          className="relative mx-auto w-full max-w-[672px]"
-        >
-          <Search className="absolute top-1/2 left-4 size-5 -translate-y-1/2 text-[#98A2B3]" />
+        <div className="mt-6 flex items-center gap-4">
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[#F0FDF4]">
+            <Search className="size-6 text-[#16A34A]" />
+          </div>
 
-          <input
-            type="search"
-            name="q"
-            defaultValue={query}
-            placeholder="Search for products..."
-            aria-label="Search for products"
-            className="h-[54px] w-full rounded-lg border border-[#D1D5DC] bg-white pr-4 pl-12 text-sm text-[#364153] outline-none transition-colors placeholder:text-[#98A2B3] focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/10"
-          />
-        </form>
+          <div className="min-w-0">
+            <h1 className="text-2xl leading-8 font-bold text-[#101828]">
+              Search Results
+            </h1>
+
+            <p className="mt-1 truncate text-sm text-[#6A7282]">
+              {keyword
+                ? `Showing products matching "${keyword}"`
+                : "Explore our product collection"}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   );
