@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
-import Image from "next/image";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   Headset,
@@ -31,7 +30,6 @@ export default function Navbar({
   onLogout,
   onSearch,
 }: NavbarProps) {
-  const pathname = usePathname();
   const [isMobileSheetOpen, setIsMobileSheetOpen] = useState(false);
 const router = useRouter();
 
@@ -57,7 +55,7 @@ function handleSearch(query: string) {
           <BrandLogo variant="navbar" />
 
           {/* Desktop search */}
-          {pathname !== "/search" && <SearchBar onSearch={handleSearch} />}
+          <SearchBar onSearch={handleSearch} />
 
           {/* Desktop navigation */}
           <NavigationLinks items={navItems} />
