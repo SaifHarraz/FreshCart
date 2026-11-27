@@ -4,27 +4,16 @@ import type {
 } from "../types/product.types";
 import type { ProductReviewsResponse } from "../types/product-reviews.types";
 import type { GetProductsParams } from "../types/product-query.types";
+import { buildProductsQuery } from "../utils/build-products-query";
 const PRODUCTS_API_URL =
   "https://ecommerce.routemisr.com/api/v1/products";
 
 
+
 export async function getProducts(params?: GetProductsParams) {
-  const searchParams = new URLSearchParams();
-
-  if (params?.keyword) searchParams.set("keyword", params.keyword);
-  if (params?.page) searchParams.set("page", String(params.page));
-  if (params?.limit) searchParams.set("limit", String(params.limit));
-  if (params?.sort) searchParams.set("sort", params.sort);
-  if (params?.brand) searchParams.set("brand", params.brand);
-  if (params?.category) searchParams.set("category[in]", params.category);
-
-  if (params?.minPrice !== undefined) {
-    searchParams.set("price[gte]", String(params.minPrice));
-  }
-
-  if (params?.maxPrice !== undefined) {
-    searchParams.set("price[lte]", String(params.maxPrice));
-  }
+  const searchParams = params
+    ? buildProductsQuery(params)
+    : new URLSearchParams();
 
   const url = searchParams.size
     ? `${PRODUCTS_API_URL}?${searchParams.toString()}`
@@ -44,6 +33,7 @@ export async function getProducts(params?: GetProductsParams) {
 
   return result;
 }
+
 
 
 
