@@ -1,17 +1,23 @@
 import { SearchResultsToolbarProps } from "../../types/search-page.types";
+import SortSelect from "../SortSelect/SortSelect";
+
+
 
 export default function SearchResultsToolbar({
   keyword,
   total,
   sort,
+  brand,
+  category,
+  categoryIn,
+  minPrice,
+  maxPrice,
 }: SearchResultsToolbarProps) {
   return (
     <div className="flex flex-col justify-between gap-4 border-b border-[#E5E7EB] pb-5 sm:flex-row sm:items-center">
       <div>
         <h2 className="text-base leading-6 font-semibold text-[#1E2939]">
-          {keyword
-            ? `Results for "${keyword}"`
-            : "All Products"}
+          {keyword ? `Results for "${keyword}"` : "All Products"}
         </h2>
 
         <p className="mt-1 text-sm leading-5 text-[#6A7282]">
@@ -25,11 +31,27 @@ export default function SearchResultsToolbar({
         className="flex items-center gap-3"
       >
         {keyword && (
-          <input
-            type="hidden"
-            name="keyword"
-            value={keyword}
-          />
+          <input type="hidden" name="keyword" value={keyword} />
+        )}
+
+        {brand && (
+          <input type="hidden" name="brand" value={brand} />
+        )}
+
+        {category && (
+          <input type="hidden" name="category" value={category} />
+        )}
+
+        {categoryIn && (
+          <input type="hidden" name="categoryIn" value={categoryIn} />
+        )}
+
+        {minPrice !== undefined && (
+          <input type="hidden" name="minPrice" value={minPrice} />
+        )}
+
+        {maxPrice !== undefined && (
+          <input type="hidden" name="maxPrice" value={maxPrice} />
         )}
 
         <label
@@ -39,25 +61,7 @@ export default function SearchResultsToolbar({
           Sort by
         </label>
 
-        <select
-          id="search-sort"
-          name="sort"
-          defaultValue={sort}
-          className="h-10 min-w-40 rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#1E2939] outline-none transition-colors focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/10"
-        >
-          <option value="">Recommended</option>
-          <option value="price">Price: Low to High</option>
-          <option value="-price">Price: High to Low</option>
-          <option value="-ratingsAverage">Top Rated</option>
-          <option value="-createdAt">Newest</option>
-        </select>
-
-        <button
-          type="submit"
-          className="h-10 rounded-lg bg-[#16A34A] px-4 text-sm font-semibold text-white transition-colors hover:bg-[#15803D]"
-        >
-          Apply
-        </button>
+        <SortSelect sort={sort} />
       </form>
     </div>
   );

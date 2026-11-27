@@ -1,25 +1,22 @@
-
 import SearchPageHeader from "@/features/search/components/SearchPageHeader/SearchPageHeader";
 import SearchResultsToolbar from "@/features/search/components/SearchToolbar/SearchToolbar";
 import ProductGrid from "@/features/products/components/ProductGrid/ProductGrid";
 import { getProducts } from "@/features/products/services/products.service";
-import { parseSearchParams } from "@/features/search/utils/parse-search-params";
+import { parseSearchParamNumber, parseSearchParams } from "@/features/search/utils/parse-search-params";
 import type { SearchPageSearchParams } from "@/features/search/types/search-page.types";
 
 interface SearchPageProps {
   searchParams: Promise<SearchPageSearchParams>;
 }
 
-export default async function SearchPage({
-  searchParams,
-}: SearchPageProps) {
+export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
 
   const keyword = params.keyword?.trim() ?? "";
   const sort = params.sort ?? "";
 
   const { data: products, results: total } = await getProducts(
-    parseSearchParams(params)
+    parseSearchParams(params),
   );
 
   return (
@@ -31,6 +28,11 @@ export default async function SearchPage({
           keyword={keyword}
           total={total}
           sort={sort}
+          brand={params.brand}
+          category={params.category}
+          categoryIn={params.categoryIn}
+          minPrice={parseSearchParamNumber(params.minPrice)}
+          maxPrice={parseSearchParamNumber(params.maxPrice)}
         />
 
         <div className="mt-6">
