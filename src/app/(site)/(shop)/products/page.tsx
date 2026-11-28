@@ -1,24 +1,23 @@
-import ProductsResultsCount from "@/features/products/components/ProductsResultsCount/ProductsResultsCount";
-import ProductGrid from "@/features/products/components/ProductGrid/ProductGrid";
-import { getProducts } from "@/features/products/services/products.service";
+import { Suspense } from "react";
+
 import ProductPageHeader from "@/features/products/components/ProductPageHeader/ProductPageHeader";
+import ProductsGridContent from "@/features/products/components/ProductsGridContent/ProductsGridContent";
+import ProductsGridSkeleton from "@/features/products/components/ProductsGridSkeleton/ProductsGridSkeleton";
 
-export default async function Page() {
-  const { data: products, results: total } = await getProducts();
+type ProductsPageProps = {
+  searchParams: Promise<{
+    page?: string;
+  }>;
+};
 
+export default function Page({ searchParams }: ProductsPageProps) {
   return (
     <>
       <ProductPageHeader />
 
-      <main className="mx-auto w-full max-w-[1536px] px-4">
-        <div className="pt-8">
-          <ProductsResultsCount total={total} />
-        </div>
-
-        <div className="mt-6">
-          <ProductGrid products={products} />
-        </div>
-      </main>
+      <Suspense fallback={<ProductsGridSkeleton />}>
+        <ProductsGridContent searchParams={searchParams} />
+      </Suspense>
     </>
   );
 }
