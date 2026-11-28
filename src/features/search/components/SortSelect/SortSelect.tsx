@@ -1,26 +1,41 @@
 
 "use client";
 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 interface SortSelectProps {
   sort: string;
+  onSortChange: (value: string) => void;
 }
 
-export default function SortSelect({ sort }: SortSelectProps) {
+export default function SortSelect({
+  sort,
+  onSortChange,
+}: SortSelectProps) {
   return (
-    <select
-      id="search-sort"
-      name="sort"
-      defaultValue={sort}
-      onChange={(event) => {
-        event.currentTarget.form?.requestSubmit();
-      }}
-      className="h-10 min-w-40 rounded-lg border border-[#E5E7EB] bg-white px-3 text-sm text-[#1E2939] outline-none transition-colors focus:border-[#16A34A] focus:ring-2 focus:ring-[#16A34A]/10"
+    <Select
+      value={sort || "recommended"}
+      onValueChange={(value) =>
+  onSortChange(!value || value === "recommended" ? "" : value)
+}
     >
-      <option value="">Recommended</option>
-      <option value="price">Price: Low to High</option>
-      <option value="-price">Price: High to Low</option>
-      <option value="-ratingsAverage">Top Rated</option>
-      <option value="-createdAt">Newest</option>
-    </select>
+      <SelectTrigger id="search-sort" className="h-10 min-w-40">
+        <SelectValue />
+      </SelectTrigger>
+
+      <SelectContent>
+        <SelectItem value="recommended">Recommended</SelectItem>
+        <SelectItem value="price">Price: Low to High</SelectItem>
+        <SelectItem value="-price">Price: High to Low</SelectItem>
+        <SelectItem value="-ratingsAverage">Top Rated</SelectItem>
+        <SelectItem value="-createdAt">Newest</SelectItem>
+      </SelectContent>
+    </Select>
   );
 }

@@ -1,4 +1,8 @@
+
 import { X } from "lucide-react";
+
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 export type ActiveFilter = {
   id: string;
@@ -21,9 +25,10 @@ export default function ActiveFilterChips({
   return (
     <div className="flex flex-wrap items-center gap-2">
       {filters.map((filter) => (
-        <span
+        <Badge
           key={filter.id}
-          className="inline-flex h-8 items-center gap-2 rounded-full border border-[#D1D5DC] bg-white py-1 pr-2 pl-3 text-sm text-[#364153]"
+          variant="outline"
+          className="h-8 gap-2 rounded-full border-[#D1D5DC] bg-white py-1 pr-2 pl-3 text-sm font-normal text-[#364153]"
         >
           {filter.label}
 
@@ -35,16 +40,18 @@ export default function ActiveFilterChips({
           >
             <X className="size-3.5" />
           </button>
-        </span>
+        </Badge>
       ))}
 
-      <button
+      <Button
         type="button"
+        variant="ghost"
+        size="sm"
         onClick={onClearAll}
-        className="h-8 px-2 text-sm font-medium text-[#16A34A] transition-colors hover:text-[#15803D]"
+        className="h-8 px-2 text-sm font-medium text-[#16A34A] hover:text-[#15803D]"
       >
         Clear All
-      </button>
+      </Button>
     </div>
   );
 }

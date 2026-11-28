@@ -1,6 +1,8 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
+
 import {
   Drawer,
   DrawerContent,
@@ -20,7 +22,6 @@ export type SearchFilters = {
   maxPrice: string;
   category: string;
   brand: string;
-  rating: string;
 };
 
 type SearchFiltersDrawerProps = {
@@ -37,7 +38,6 @@ export const emptyFilters: SearchFilters = {
   maxPrice: "",
   category: "",
   brand: "",
-  rating: "",
 };
 
 export default function SearchFiltersDrawer({
@@ -62,13 +62,13 @@ export default function SearchFiltersDrawer({
     return () => mediaQuery.removeEventListener("change", updateViewport);
   }, []);
 
-function handleOpenChange(nextOpen: boolean) {
-  if (nextOpen) {
-    setDraft(initialFilters);
-  }
+  function handleOpenChange(nextOpen: boolean) {
+    if (nextOpen) {
+      setDraft(initialFilters);
+    }
 
-  onOpenChange(nextOpen);
-}
+    onOpenChange(nextOpen);
+  }
 
   function updateFilter<K extends keyof SearchFilters>(
     key: K,
@@ -109,7 +109,6 @@ function handleOpenChange(nextOpen: boolean) {
         </DrawerHeader>
 
         <div className="flex-1 space-y-6 overflow-y-auto px-6 py-5">
-          {/* Price */}
           <section className="space-y-3">
             <h3 className="font-semibold text-[#364153]">Price range</h3>
 
@@ -134,7 +133,6 @@ function handleOpenChange(nextOpen: boolean) {
             </div>
           </section>
 
-          {/* Category */}
           <section className="space-y-3">
             <h3 className="font-semibold text-[#364153]">Category</h3>
 
@@ -144,6 +142,7 @@ function handleOpenChange(nextOpen: boolean) {
               className="h-11 w-full rounded-lg border bg-white px-3 outline-none focus:border-[#16A34A]"
             >
               <option value="">All categories</option>
+
               {categories.map((category) => (
                 <option key={category._id} value={category._id}>
                   {category.name}
@@ -152,7 +151,6 @@ function handleOpenChange(nextOpen: boolean) {
             </select>
           </section>
 
-          {/* Brand */}
           <section className="space-y-3">
             <h3 className="font-semibold text-[#364153]">Brand</h3>
 
@@ -162,28 +160,12 @@ function handleOpenChange(nextOpen: boolean) {
               className="h-11 w-full rounded-lg border bg-white px-3 outline-none focus:border-[#16A34A]"
             >
               <option value="">All brands</option>
+
               {brands.map((brand) => (
                 <option key={brand._id} value={brand._id}>
                   {brand.name}
                 </option>
               ))}
-            </select>
-          </section>
-
-          {/* Rating */}
-          <section className="space-y-3">
-            <h3 className="font-semibold text-[#364153]">Minimum rating</h3>
-
-            <select
-              value={draft.rating}
-              onChange={(e) => updateFilter("rating", e.target.value)}
-              className="h-11 w-full rounded-lg border bg-white px-3 outline-none focus:border-[#16A34A]"
-            >
-              <option value="">Any rating</option>
-              <option value="4">4 stars & above</option>
-              <option value="3">3 stars & above</option>
-              <option value="2">2 stars & above</option>
-              <option value="1">1 star & above</option>
             </select>
           </section>
         </div>
