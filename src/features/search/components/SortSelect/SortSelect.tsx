@@ -25,7 +25,7 @@ export default function SortSelect({
   onSortChange(!value || value === "recommended" ? "" : value)
 }
     >
-      <SelectTrigger id="search-sort" className="h-10 min-w-40">
+      <SelectTrigger id="search-sort" className="h-10 min-w-40 cursor-pointer">
         <SelectValue />
       </SelectTrigger>
 

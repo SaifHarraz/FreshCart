@@ -34,14 +34,18 @@ export default function Navbar({
 const router = useRouter();
 
 function handleSearch(query: string) {
-  if (!query) return;
-
   if (onSearch) {
     onSearch(query);
     return;
   }
 
-  router.push(`/search?keyword=${encodeURIComponent(query)}`);
+  const trimmedQuery = query.trim();
+
+  router.push(
+    trimmedQuery
+      ? `/search?keyword=${encodeURIComponent(trimmedQuery)}`
+      : "/search",
+  );
 }
   function closeMobileMenu() {
     setIsMobileSheetOpen(false);
@@ -111,7 +115,7 @@ function handleSearch(query: string) {
               type="button"
               aria-label="Open navigation"
               onClick={() => setIsMobileSheetOpen(true)}
-              className="lg:hidden"
+              className="lg:hidden cursor-pointer"
             >
               <Menu className="size-6" />
             </button>

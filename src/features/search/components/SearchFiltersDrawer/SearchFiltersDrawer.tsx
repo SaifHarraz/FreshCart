@@ -139,7 +139,7 @@ export default function SearchFiltersDrawer({
             <select
               value={draft.category}
               onChange={(e) => updateFilter("category", e.target.value)}
-              className="h-11 w-full rounded-lg border bg-white px-3 outline-none focus:border-[#16A34A]"
+              className="h-11 cursor-pointer w-full rounded-lg border bg-white px-3 outline-none focus:border-[#16A34A]"
             >
               <option value="">All categories</option>
 
@@ -157,7 +157,7 @@ export default function SearchFiltersDrawer({
             <select
               value={draft.brand}
               onChange={(e) => updateFilter("brand", e.target.value)}
-              className="h-11 w-full rounded-lg border bg-white px-3 outline-none focus:border-[#16A34A]"
+              className="h-11 w-full cursor-pointer rounded-lg border bg-white px-3 outline-none focus:border-[#16A34A]"
             >
               <option value="">All brands</option>
 
@@ -174,7 +174,7 @@ export default function SearchFiltersDrawer({
           <button
             type="button"
             onClick={handleReset}
-            className="h-11 flex-1 rounded-lg border font-medium"
+            className="h-11 cursor-pointer flex-1 rounded-lg border font-medium"
           >
             Reset
           </button>
@@ -182,7 +182,7 @@ export default function SearchFiltersDrawer({
           <button
             type="button"
             onClick={handleApply}
-            className="h-11 flex-1 rounded-lg bg-[#16A34A] font-semibold text-white hover:bg-[#15803D]"
+            className="h-11 cursor-pointer flex-1 rounded-lg bg-[#16A34A] font-semibold text-white hover:bg-[#15803D]"
           >
             Apply Filters
           </button>

@@ -36,7 +36,7 @@ export default function ActiveFilterChips({
             type="button"
             aria-label={`Remove ${filter.label} filter`}
             onClick={() => onRemove(filter.id)}
-            className="rounded-full p-0.5 text-[#6A7282] transition-colors hover:bg-[#E5E7EB] hover:text-[#364153]"
+            className="rounded-full cursor-pointer p-0.5 text-[#6A7282] transition-colors hover:bg-[#E5E7EB] hover:text-[#364153]"
           >
             <X className="size-3.5" />
           </button>
