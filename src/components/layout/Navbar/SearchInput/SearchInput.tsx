@@ -1,8 +1,6 @@
-
 "use client";
-
 import { useForm } from "react-hook-form";
-import { Search, X } from "lucide-react";
+import { Search } from "lucide-react";
 
 interface SearchFormValues {
   query: string;
@@ -54,18 +52,6 @@ export default function SearchInput({
           aria-label="Search products"
           className="w-full rounded-full border  border-gray-200 bg-gray-50/50 py-3 pr-14 pl-5 text-sm transition-all placeholder:text-gray-400 focus:border-secondary0 focus:bg-white focus:ring-2 focus:ring-secondary0/20 focus:outline-none"
         />
-
-        {/* {query && (
-          <button
-            type="button"
-            aria-label="Clear search input"
-            onClick={handleClear}
-            className="absolute top-1/2 right-12 flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-200 hover:text-gray-700"
-          >
-            <X className="size-4" />
-          </button>
-        )} */}
-
         <button
           type="submit"
           aria-label="Submit search"

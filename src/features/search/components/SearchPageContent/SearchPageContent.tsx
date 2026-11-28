@@ -67,7 +67,6 @@ export default async function SearchPageContent({
       <section className="mx-auto w-full max-w-[1536px] px-4 py-8 md:py-10">
         <SearchResultsToolbar
           keyword={keyword}
-          total={total}
           sort={sort}
           brand={params.brand}
           category={params.category}

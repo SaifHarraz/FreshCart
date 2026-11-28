@@ -6,10 +6,8 @@ import {
   Headset,
   Heart,
   Menu,
-  Search,
   ShoppingCart,
   UserRound,
-  X,
 } from "lucide-react";
 import MobileNavigationSheet from "./MobileNavigationSheet/MobileNavigationSheet";
 import { headerConfig, navigationItems } from "../header-config";
@@ -140,38 +138,3 @@ function handleSearch(query: string) {
   );
 }
 
-/*
- * Kept separate from the desktop SearchBar so the mobile header
- * can show its own responsive search field.
- */
-function MobileSearch({ onSearch }: { onSearch?: (query: string) => void }) {
-  const [query, setQuery] = useState("");
-
-  return (
-    <form
-      role="search"
-      onSubmit={(event) => {
-        event.preventDefault();
-        onSearch?.(query.trim());
-      }}
-      className="relative"
-    >
-      <input
-        type="search"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        placeholder="Search for products, brands and more..."
-        aria-label="Search products"
-        className="w-full rounded-full border border-gray-200 bg-gray-50 px-5 py-3 pr-12 text-sm outline-none transition-colors focus:border-secondary0 focus:bg-white"
-      />
-
-      <button
-        type="submit"
-        aria-label="Submit search"
-        className="absolute top-1/2 right-2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-primary text-white hover:bg-primary-hover"
-      >
-        <Search className="h-4 w-4" />
-      </button>
-    </form>
-  );
-}

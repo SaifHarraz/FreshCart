@@ -23,13 +23,12 @@ export default function ActiveFilterChips({
   if (filters.length === 0) return null;
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <div className="flex min-w-0 flex-wrap items-center gap-2">
       {filters.map((filter) => (
         <Badge
           key={filter.id}
           variant="outline"
-          className="h-8 gap-2 rounded-full border-[#D1D5DC] bg-white py-1 pr-2 pl-3 text-sm font-normal text-[#364153]"
-        >
+          className="h-8 max-w-full gap-2 whitespace-normal break-words rounded-full border-[#D1D5DC] bg-white py-1 pr-2 pl-3 text-sm font-normal text-[#364153]">
           {filter.label}
 
           <button
@@ -48,7 +47,7 @@ export default function ActiveFilterChips({
         variant="ghost"
         size="sm"
         onClick={onClearAll}
-        className="h-8 px-2 text-sm font-medium text-[#16A34A] hover:text-[#15803D]"
+        className="h-8 shrink-0 whitespace-nowrap px-2 text-sm font-medium text-[#16A34A] hover:text-[#15803D]"
       >
         Clear All
       </Button>

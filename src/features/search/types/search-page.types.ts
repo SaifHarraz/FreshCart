@@ -11,7 +11,6 @@ categoryName?: string;
 
 export interface SearchResultsToolbarProps {
   keyword: string;
-  total: number;
   sort: string;
   brand?: string;
   category?: string;

@@ -18,7 +18,6 @@ export function parseSearchParams(
   const minPrice = parseSearchParamNumber(params.minPrice);
   const maxPrice = parseSearchParamNumber(params.maxPrice);
   const page = parseSearchParamNumber(params.page);
-  const limit = parseSearchParamNumber(params.limit);
 
   return {
     ...(params.keyword?.trim() && { keyword: params.keyword.trim() }),
@@ -28,6 +27,5 @@ export function parseSearchParams(
     ...(minPrice !== undefined && { minPrice }),
     ...(maxPrice !== undefined && { maxPrice }),
     ...(page !== undefined && { page }),
-    ...(limit !== undefined && { limit }),
   };
 }

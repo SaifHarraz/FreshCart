@@ -110,50 +110,55 @@ export default function SearchResultsToolbar({
   return (
     <>
       <div className="flex flex-col gap-3 border-b border-[#E5E7EB] pb-5">
-        <div className="flex flex-wrap items-center gap-3">
-          <Button
-            type="button"
-            variant="outline"
-            size="lg"
-            onClick={() => setIsDrawerOpen(true)}
-            className="shrink-0 cursor-pointer gap-2"
-          >
-            <SlidersHorizontal className="size-4" />
-            Filters
-          </Button>
+       <div className="grid grid-cols-1 gap-3 border-b border-[#E5E7EB] pb-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center">
+  {/* Filters and Clear Search */}
+  <div className="flex min-w-0 flex-wrap items-center gap-2">
+    <Button
+      type="button"
+      variant="outline"
+      size="lg"
+      onClick={() => setIsDrawerOpen(true)}
+      className="shrink-0 cursor-pointer gap-2 whitespace-nowrap"
+    >
+      <SlidersHorizontal className="size-4" />
+      Filters
+    </Button>
 
-          {keyword && (
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={handleClearSearch}
-              className="cursor-pointer gap-1.5 text-[#6A7282] hover:text-[#16A34A]"
-            >
-              <Search className="size-4" />
-              Clear Search
-            </Button>
-          )}
+    {keyword && (
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        onClick={handleClearSearch}
+        className="shrink-0 cursor-pointer gap-1.5 whitespace-nowrap text-[#6A7282] hover:text-[#16A34A]"
+      >
+        <Search className="size-4" />
+        Clear Search
+      </Button>
+    )}
+  </div>
 
-          <div className="min-w-0 flex-1">
-            <ActiveFilterChips
-              filters={activeFilters}
-              onRemove={handleRemoveFilter}
-              onClearAll={handleClearAll}
-            />
-          </div>
+  {/* Sort */}
+  <div className="flex shrink-0 items-center justify-end gap-2">
+    <label
+      htmlFor="search-sort"
+      className="hidden text-sm font-medium text-[#4A5565] sm:block"
+    >
+      Sort by
+    </label>
 
-          <div className="flex shrink-0 items-center gap-2">
-            <label
-              htmlFor="search-sort"
-              className="hidden text-sm font-medium text-[#4A5565] sm:block"
-            >
-              Sort by
-            </label>
+    <SortSelect sort={sort} onSortChange={handleSortChange} />
+  </div>
 
-            <SortSelect sort={sort} onSortChange={handleSortChange} />
-          </div>
-        </div>
+  {/* Active Filters */}
+  <div className="min-w-0 sm:col-span-2">
+    <ActiveFilterChips
+      filters={activeFilters}
+      onRemove={handleRemoveFilter}
+      onClearAll={handleClearAll}
+    />
+  </div>
+</div>
       </div>
 
       <SearchFiltersDrawer
