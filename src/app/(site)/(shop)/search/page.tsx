@@ -1,8 +1,17 @@
+
 import SearchPageHeader from "@/features/search/components/SearchPageHeader/SearchPageHeader";
 import SearchResultsToolbar from "@/features/search/components/SearchToolbar/SearchToolbar";
 import ProductGrid from "@/features/products/components/ProductGrid/ProductGrid";
+
 import { getProducts } from "@/features/products/services/products.service";
-import { parseSearchParamNumber, parseSearchParams } from "@/features/search/utils/parse-search-params";
+import { getBrands } from "@/features/brands/services/brands.service";
+import { getCategories } from "@/features/categories/services/categories.service";
+
+import {
+  parseSearchParamNumber,
+  parseSearchParams,
+} from "@/features/search/utils/parse-search-params";
+
 import type { SearchPageSearchParams } from "@/features/search/types/search-page.types";
 
 interface SearchPageProps {
@@ -15,13 +24,19 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   const keyword = params.keyword?.trim() ?? "";
   const sort = params.sort ?? "";
 
-  const { data: products, results: total } = await getProducts(
-    parseSearchParams(params),
-  );
+  const [
+    { data: products, results: total },
+    brands,
+    categories,
+  ] = await Promise.all([
+    getProducts(parseSearchParams(params)),
+    getBrands(),
+    getCategories(),
+  ]);
 
   return (
     <>
-      <SearchPageHeader keyword={keyword} />
+      <SearchPageHeader keyword={keyword} total={total} />
 
       <section className="mx-auto w-full max-w-[1536px] px-4 py-8 md:py-10">
         <SearchResultsToolbar
@@ -33,6 +48,8 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
           categoryIn={params.categoryIn}
           minPrice={parseSearchParamNumber(params.minPrice)}
           maxPrice={parseSearchParamNumber(params.maxPrice)}
+          brands={brands}
+          categories={categories}
         />
 
         <div className="mt-6">

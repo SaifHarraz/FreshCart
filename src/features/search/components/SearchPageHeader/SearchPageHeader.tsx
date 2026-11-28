@@ -1,11 +1,12 @@
 
 import Link from "next/link";
 import { Search } from "lucide-react";
-import { SearchPageHeaderProps } from "../../types/search-page.types";
 
+import type { SearchPageHeaderProps } from "../../types/search-page.types";
 
 export default function SearchPageHeader({
   keyword,
+  total,
 }: SearchPageHeaderProps) {
   return (
     <section className="border-b border-[#E5E7EB] bg-white">
@@ -20,9 +21,7 @@ export default function SearchPageHeader({
 
           <span>/</span>
 
-          <span className="text-[#1E2939]">
-            Search
-          </span>
+          <span className="text-[#1E2939]">Search</span>
         </nav>
 
         <div className="mt-6 flex items-center gap-4">
@@ -32,13 +31,13 @@ export default function SearchPageHeader({
 
           <div className="min-w-0">
             <h1 className="text-2xl leading-8 font-bold text-[#101828]">
-              Search Results
+              {keyword ? `Results for "${keyword}"` : "All Products"}
             </h1>
 
-            <p className="mt-1 truncate text-sm text-[#6A7282]">
-              {keyword
-                ? `Showing products matching "${keyword}"`
-                : "Explore our product collection"}
+            <p className="mt-1 text-sm text-[#6A7282]">
+              {total === 0
+                ? "No products found"
+                : `Found ${total} products`}
             </p>
           </div>
         </div>

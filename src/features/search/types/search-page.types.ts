@@ -1,5 +1,10 @@
+
+import type { Brand } from "@/features/brands/types/brand.types";
+import type { Category } from "@/features/categories/types/category.types";
+
 export interface SearchPageHeaderProps {
   keyword: string;
+  total: number;
 }
 
 export interface SearchResultsToolbarProps {
@@ -11,6 +16,8 @@ export interface SearchResultsToolbarProps {
   categoryIn?: string;
   minPrice?: number;
   maxPrice?: number;
+  brands: Brand[];
+  categories: Category[];
 }
 
 export interface SearchPageSearchParams {
