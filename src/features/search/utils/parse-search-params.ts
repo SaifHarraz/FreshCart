@@ -25,7 +25,6 @@ export function parseSearchParams(
     ...(params.sort && { sort: params.sort }),
     ...(params.brand && { brand: params.brand }),
     ...(params.category && { category: params.category }),
-    ...(params.categoryIn && { categoryIn: params.categoryIn }),
     ...(minPrice !== undefined && { minPrice }),
     ...(maxPrice !== undefined && { maxPrice }),
     ...(page !== undefined && { page }),

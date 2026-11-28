@@ -71,7 +71,6 @@ export default async function SearchPageContent({
           sort={sort}
           brand={params.brand}
           category={params.category}
-          categoryIn={params.categoryIn}
           minPrice={parseSearchParamNumber(params.minPrice)}
           maxPrice={parseSearchParamNumber(params.maxPrice)}
           brands={brands}

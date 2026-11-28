@@ -16,7 +16,6 @@ export default function SearchResultsToolbar({
   keyword,
   brand,
   category,
-  categoryIn,
   minPrice,
   maxPrice,
   brands,
@@ -62,15 +61,6 @@ export default function SearchResultsToolbar({
           label: `Category: ${categories.find((item) => item._id === category)?.name ?? category}`,
         }]
       : []),
-    ...(categoryIn
-      ? [{
-          id: "categoryIn",
-          label: `Categories: ${categoryIn
-            .split(",")
-            .map((id) => categories.find((item) => item._id === id)?.name ?? id)
-            .join(", ")}`,
-        }]
-      : []),
     ...(minPrice !== undefined
       ? [{ id: "minPrice", label: `Min: ${minPrice} EGP` }]
       : []),
@@ -83,7 +73,6 @@ export default function SearchResultsToolbar({
     updateUrl({
       brand: filters.brand || null,
       category: filters.category || null,
-      categoryIn: filters.category ? null : categoryIn || null,
       minPrice: filters.minPrice || null,
       maxPrice: filters.maxPrice || null,
     });
@@ -97,7 +86,6 @@ export default function SearchResultsToolbar({
     updateUrl({
       brand: null,
       category: null,
-      categoryIn: null,
       minPrice: null,
       maxPrice: null,
     });

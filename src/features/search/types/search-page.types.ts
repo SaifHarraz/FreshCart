@@ -15,7 +15,6 @@ export interface SearchResultsToolbarProps {
   sort: string;
   brand?: string;
   category?: string;
-  categoryIn?: string;
   minPrice?: number;
   maxPrice?: number;
   brands: Brand[];
@@ -27,7 +26,6 @@ export interface SearchPageSearchParams {
   sort?: string;
   brand?: string;
   category?: string;
-  categoryIn?: string;
   minPrice?: string;
   maxPrice?: string;
   page?: string;
