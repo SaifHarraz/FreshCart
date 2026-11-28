@@ -11,34 +11,11 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
-
-export type FilterOption = {
-  _id: string;
-  name: string;
-};
-
-export type SearchFilters = {
-  minPrice: string;
-  maxPrice: string;
-  category: string;
-  brand: string;
-};
-
-type SearchFiltersDrawerProps = {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  categories: FilterOption[];
-  brands: FilterOption[];
-  initialFilters: SearchFilters;
-  onApply: (filters: SearchFilters) => void;
-};
-
-export const emptyFilters: SearchFilters = {
-  minPrice: "",
-  maxPrice: "",
-  category: "",
-  brand: "",
-};
+import {
+  emptyFilters,
+  type SearchFilters,
+  type SearchFiltersDrawerProps,
+} from "@/features/search/types/search-filters.types";
 
 export default function SearchFiltersDrawer({
   open,

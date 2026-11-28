@@ -7,12 +7,10 @@ import { Search, SlidersHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import type { SearchResultsToolbarProps } from "../../types/search-page.types";
-import SearchFiltersDrawer, {
-  emptyFilters,
-  type SearchFilters,
-} from "../SearchFiltersDrawer/SearchFiltersDrawer";
 import ActiveFilterChips from "../ActiveFilterChips/ActiveFilterChips";
 import SortSelect from "../SortSelect/SortSelect";
+import { emptyFilters, SearchFilters } from "../../types/search-filters.types";
+import SearchFiltersDrawer from "../SearchFiltersDrawer/SearchFiltersDrawer";
 
 export default function SearchResultsToolbar({
   keyword,

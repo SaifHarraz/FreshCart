@@ -7,16 +7,15 @@ export type FilterOption = Pick<Category | Brand, "_id" | "name">;
 export type SearchFilters = {
   minPrice: string;
   maxPrice: string;
-  categories: string[];
-  brands: string[];
-  rating: number | null;
+  category: string;
+  brand: string;
 };
 
 export type SearchFiltersDrawerProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  categories: Category[];
-  brands: Brand[];
+  categories: FilterOption[];
+  brands: FilterOption[];
   initialFilters: SearchFilters;
   onApply: (filters: SearchFilters) => void;
 };
@@ -24,7 +23,6 @@ export type SearchFiltersDrawerProps = {
 export const emptyFilters: SearchFilters = {
   minPrice: "",
   maxPrice: "",
-  categories: [],
-  brands: [],
-  rating: null,
+  category: "",
+  brand: "",
 };

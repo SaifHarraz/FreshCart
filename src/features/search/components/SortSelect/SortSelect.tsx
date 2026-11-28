@@ -14,27 +14,36 @@ interface SortSelectProps {
   onSortChange: (value: string) => void;
 }
 
+const sortOptions = [
+  { label: "Recommended", value: "recommended" },
+  { label: "Price: Low to High", value: "price" },
+  { label: "Price: High to Low", value: "-price" },
+  { label: "Top Rated", value: "-ratingsAverage" },
+  { label: "Newest", value: "-createdAt" },
+];
+
 export default function SortSelect({
   sort,
   onSortChange,
 }: SortSelectProps) {
   return (
     <Select
+      items={sortOptions}
       value={sort || "recommended"}
       onValueChange={(value) =>
-  onSortChange(!value || value === "recommended" ? "" : value)
-}
+        onSortChange(!value || value === "recommended" ? "" : value)
+      }
     >
       <SelectTrigger id="search-sort" className="h-10 min-w-40 cursor-pointer">
         <SelectValue />
       </SelectTrigger>
 
       <SelectContent>
-        <SelectItem value="recommended">Recommended</SelectItem>
-        <SelectItem value="price">Price: Low to High</SelectItem>
-        <SelectItem value="-price">Price: High to Low</SelectItem>
-        <SelectItem value="-ratingsAverage">Top Rated</SelectItem>
-        <SelectItem value="-createdAt">Newest</SelectItem>
+        {sortOptions.map((option) => (
+          <SelectItem key={option.value} value={option.value}>
+            {option.label}
+          </SelectItem>
+        ))}
       </SelectContent>
     </Select>
   );
