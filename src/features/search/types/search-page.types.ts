@@ -5,6 +5,8 @@ import type { Category } from "@/features/categories/types/category.types";
 export interface SearchPageHeaderProps {
   keyword: string;
   total: number;
+  brandName?: string;
+categoryName?: string;
 }
 
 export interface SearchResultsToolbarProps {
