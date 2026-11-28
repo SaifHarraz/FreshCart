@@ -3,10 +3,10 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { BrandCardProps } from "../../types/brand.types";
 
-export default function BrandCard({ name, logo }: BrandCardProps) {
+export default function BrandCard({ name, logo ,id}: BrandCardProps) {
   return (
     <Link
-      href="/products"
+      href={`/search?brand=${encodeURIComponent(id)}`}
       aria-label={`View products from ${name}`}
       className="
         group flex h-[225px] flex-col items-center

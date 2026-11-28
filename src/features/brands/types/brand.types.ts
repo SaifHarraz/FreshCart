@@ -12,6 +12,7 @@ export interface Brand {
 export type BrandsResponse = ListingResponse<Brand>;
 
 export interface BrandCardProps {
+  id: string;
   name: string;
   logo: string;
 }

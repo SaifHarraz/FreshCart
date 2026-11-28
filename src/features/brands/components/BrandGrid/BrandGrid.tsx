@@ -14,6 +14,7 @@ export default function BrandGrid({ brands }: BrandGridProps) {
     <div className="grid grid-cols-2 gap-4 lg:grid-cols-6 lg:gap-5">
       {brands.map((brand) => (
         <BrandCard
+         id={brand._id}
           key={brand._id}
           name={brand.name}
           logo={brand.image}
